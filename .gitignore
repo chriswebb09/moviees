@@ -17,6 +17,8 @@ DerivedData/
 !default.perspectivev3
 xcuserdata/
 
+.DS_Store
+
 ## Other
 *.moved-aside
 *.xcuserstate
@@ -45,6 +47,10 @@ playground.xcworkspace
 #
 # Pods/
 
+*Pods/
+
+*.plist
+
 # Carthage
 #
 # Add this line if you want to avoid checking in source code from Carthage dependencies.
@@ -63,3 +69,5 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
+
+Secrets.swift
