@@ -21,6 +21,7 @@ final class APIClient {
     let session = URLSession(configuration: URLSessionConfiguration.default)
     let realm = try! Realm()
     var movies: Results<Movie>!
+    
     deinit {
         print("API client deallocated")
     }
@@ -41,6 +42,7 @@ extension APIClient {
         getDataFromUrl(url: url) { [weak self] data, response, error in
             
             guard let data = data else { return }
+            
             do {
                 let result = try? JSONSerialization.jsonObject(with: data, options:[]) as! [String:AnyObject]
                 let dataResponse = result?["Search"] as AnyObject
