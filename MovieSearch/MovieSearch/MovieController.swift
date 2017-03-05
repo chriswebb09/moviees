@@ -13,14 +13,12 @@ private let reuseIdentifier = "movieCell"
 
 class MovieViewController: UICollectionViewController {
     
+    let layout = UICollectionViewFlowLayout()
     var datasource = MovieControllerDataSource() {
         didSet {
             // Test
         }
     }
-    let layout = UICollectionViewFlowLayout()
-    
-    // var movies = Results<Movie>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
