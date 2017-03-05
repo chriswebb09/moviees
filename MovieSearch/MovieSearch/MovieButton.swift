@@ -24,10 +24,8 @@ class SearchButton: UIButton {
         self.frame = frame
     }
     
-    
     required init?(coder aDecoder: NSCoder? = nil) {
         self.roundedButton = true
-        
         if let coder = aDecoder {
             super.init(coder: coder)!
         } else {

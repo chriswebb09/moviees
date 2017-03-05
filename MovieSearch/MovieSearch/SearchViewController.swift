@@ -18,6 +18,7 @@ class SearchViewController: UIViewController {
         view.layoutSubviews()
     }
     
+    
     @IBAction func search(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let vc = storyboard.instantiateViewController(withIdentifier: "movieVC") as! MovieViewController
@@ -29,28 +30,11 @@ class SearchViewController: UIViewController {
         vc.loadView()
     }
     
+    // MARK: - Navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! MovieViewController
         destinationVC.title = searchView.searchField.text
         destinationVC.navigationController?.navigationBar.topItem?.title = searchView.searchField.text
-        //        destinationVC.navigationController?.navigationBar.topItem?.title = searchView.searchField.text
-        //        // Get the new view controller using [segue destinationViewController].
-        //        // Pass the selected object to the new view controller.
-        //    }
     }
-    
-    
-    //    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // let destViewController = segue.destinationViewController as! MovieViewController
-    //
-    //        if let buttonTitle = (sender as? UIButton)?.titleLabel?.text {
-    //            destViewController.title = buttonTitle
-    //        }
-    //
-    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    //        let destinationVC = segue.destination as! MovieViewController
-    //        destinationVC.navigationController?.navigationBar.topItem?.title = searchView.searchField.text
-    //        // Get the new view controller using [segue destinationViewController].
-    //        // Pass the selected object to the new view controller.
-    //    }
 }

@@ -24,5 +24,4 @@ class MovieControllerDataSource {
         layout.minimumLineSpacing = 5.0
         layout.itemSize = CGSize(width: (UIScreen.main.bounds.size.width - 40)/3, height: ((UIScreen.main.bounds.size.width - 40)/2.5))
     }
-    
 }
