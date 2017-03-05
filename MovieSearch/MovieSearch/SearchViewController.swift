@@ -10,7 +10,11 @@ import UIKit
 
 class SearchViewController: UIViewController {
     
-    @IBOutlet var searchView: SearchView!
+    @IBOutlet var searchView: SearchView! {
+        didSet {
+            print("search view set")
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,23 +23,17 @@ class SearchViewController: UIViewController {
     }
 }
 
-extension SearchViewController {
+// MARK: - Navigation
 
-    @IBAction func search(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let vc = storyboard.instantiateViewController(withIdentifier: "movieVC") as! MovieViewController
-        vc.title = searchView.searchField.text
-        vc.navigationController?.navigationBar.topItem?.title = searchView.searchField.text
-        let window = UIWindow(frame: UIScreen.main.bounds)
-        window.rootViewController = vc
-        window.makeKeyAndVisible()
-        vc.loadView()
-    }
+extension SearchViewController {
     
-    // MARK: - Navigation
+    @IBAction func search(_ sender: Any) {
+        // implement search functionality
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! MovieViewController
+        //destinationVC.test = ["New Test", "Testable"]
         destinationVC.title = searchView.searchField.text
         destinationVC.navigationController?.navigationBar.topItem?.title = searchView.searchField.text
     }

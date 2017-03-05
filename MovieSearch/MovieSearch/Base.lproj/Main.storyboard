@@ -70,7 +70,7 @@
         <scene sceneID="MRW-Vi-HKP">
             <objects>
                 <collectionViewController storyboardIdentifier="movieVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="STT-oz-A3D" customClass="MovieViewController" customModule="MovieSearch" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="xwL-FB-yQ8">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="xwL-FB-yQ8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -89,10 +89,13 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dBK-PV-jLL">
-                                            <rect key="frame" x="0.0" y="0.0" width="131" height="150"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="131" height="151"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sZa-fE-5cf">
-                                            <rect key="frame" x="22" y="152" width="87" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sZa-fE-5cf">
+                                            <rect key="frame" x="0.0" y="150" width="131" height="31"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="31" id="fSi-cA-jsr"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -100,13 +103,13 @@
                                     </subviews>
                                 </view>
                                 <constraints>
-                                    <constraint firstItem="sZa-fE-5cf" firstAttribute="centerX" secondItem="dBK-PV-jLL" secondAttribute="centerX" id="ao5-zx-asK"/>
-                                    <constraint firstItem="sZa-fE-5cf" firstAttribute="top" secondItem="dBK-PV-jLL" secondAttribute="bottom" constant="2" id="doH-8m-hMx"/>
-                                    <constraint firstItem="sZa-fE-5cf" firstAttribute="centerX" secondItem="AcL-bb-PUZ" secondAttribute="centerX" id="h5u-Be-TMc"/>
+                                    <constraint firstItem="sZa-fE-5cf" firstAttribute="leading" secondItem="dBK-PV-jLL" secondAttribute="leading" id="0S5-OZ-S2o"/>
+                                    <constraint firstAttribute="trailing" secondItem="sZa-fE-5cf" secondAttribute="trailing" id="G7K-Bb-jbT"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="dBK-PV-jLL" secondAttribute="bottom" constant="22" id="Lhz-Gw-qAO"/>
+                                    <constraint firstAttribute="bottom" secondItem="sZa-fE-5cf" secondAttribute="bottom" id="Lzi-Lx-8kz"/>
                                     <constraint firstItem="dBK-PV-jLL" firstAttribute="top" secondItem="AcL-bb-PUZ" secondAttribute="top" id="hx6-O5-f8c"/>
-                                    <constraint firstItem="sZa-fE-5cf" firstAttribute="leading" secondItem="AcL-bb-PUZ" secondAttribute="leadingMargin" constant="14" id="uHX-hp-wPj"/>
+                                    <constraint firstItem="sZa-fE-5cf" firstAttribute="trailing" secondItem="dBK-PV-jLL" secondAttribute="trailing" id="nrP-s2-A77"/>
                                     <constraint firstItem="dBK-PV-jLL" firstAttribute="leading" secondItem="AcL-bb-PUZ" secondAttribute="leading" id="vAx-KJ-5V4"/>
-                                    <constraint firstItem="sZa-fE-5cf" firstAttribute="bottom" secondItem="AcL-bb-PUZ" secondAttribute="bottomMargin" id="ySe-ak-rwm"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="posterView" destination="dBK-PV-jLL" id="01D-KM-Oio"/>
@@ -149,6 +152,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="zZd-D6-eXP" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="nX0-bH-IFh">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>

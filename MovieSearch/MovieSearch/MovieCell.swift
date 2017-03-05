@@ -13,7 +13,6 @@ class MovieCell: UICollectionViewCell {
     @IBOutlet weak var posterView: UIImageView! {
         didSet {
             posterView.backgroundColor = .gray
-            
         }
     }
     

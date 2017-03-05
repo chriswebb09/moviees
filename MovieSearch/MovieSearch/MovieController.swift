@@ -12,15 +12,19 @@ private let reuseIdentifier = "movieCell"
 
 class MovieViewController: UICollectionViewController {
     
-    var datasource = MovieControllerDataSource()
+    var datasource = MovieControllerDataSource() {
+        didSet {
+            // Test
+        }
+    }
     let layout = UICollectionViewFlowLayout()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         edgesForExtendedLayout = []
         collectionView!.collectionViewLayout = layout
         datasource.layoutCells(layout: layout)
-        collectionView!.backgroundColor = .lightGray 
+        collectionView!.backgroundColor = .lightGray
     }
 }
 

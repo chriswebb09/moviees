@@ -19,13 +19,12 @@ class SearchButton: UIButton {
     }
     
     override init(frame: CGRect) {
-        self.roundedButton = true
+        roundedButton = true
         super.init(frame: frame)
-        self.frame = frame
     }
     
     required init?(coder aDecoder: NSCoder? = nil) {
-        self.roundedButton = true
+        roundedButton = true
         if let coder = aDecoder {
             super.init(coder: coder)!
         } else {

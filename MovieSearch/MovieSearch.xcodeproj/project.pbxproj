@@ -14,7 +14,7 @@
 		A75A672C1E6B56B700399BEC /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75A672B1E6B56B700399BEC /* SearchViewModel.swift */; };
 		A75A672E1E6B588000399BEC /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75A672D1E6B588000399BEC /* SearchView.swift */; };
 		A75A67301E6B597800399BEC /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75A672F1E6B597800399BEC /* SearchViewController.swift */; };
-		A75A682A1E6B998500399BEC /* MovieSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75A68291E6B998500399BEC /* MovieSearch.swift */; };
+		A75A682A1E6B998500399BEC /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75A68291E6B998500399BEC /* APIClient.swift */; };
 		A75A682C1E6BAA3D00399BEC /* MovieControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75A682B1E6BAA3D00399BEC /* MovieControllerDataSource.swift */; };
 		A7B22DFD1E6620460087A028 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B22DFC1E6620460087A028 /* AppDelegate.swift */; };
 		A7B22E021E6620460087A028 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7B22E001E6620460087A028 /* Main.storyboard */; };
@@ -58,7 +58,7 @@
 		A75A672B1E6B56B700399BEC /* SearchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		A75A672D1E6B588000399BEC /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		A75A672F1E6B597800399BEC /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		A75A68291E6B998500399BEC /* MovieSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieSearch.swift; sourceTree = "<group>"; };
+		A75A68291E6B998500399BEC /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		A75A682B1E6BAA3D00399BEC /* MovieControllerDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieControllerDataSource.swift; sourceTree = "<group>"; };
 		A7B22DF91E6620450087A028 /* MovieSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7B22DFC1E6620460087A028 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -138,6 +138,8 @@
 				A7B22E2A1E6620860087A028 /* MovieController.swift */,
 				A75A682B1E6BAA3D00399BEC /* MovieControllerDataSource.swift */,
 				A7B22E2E1E6623040087A028 /* Movie.swift */,
+				A75A67271E6B516400399BEC /* MovieButton.swift */,
+				A75A68291E6B998500399BEC /* APIClient.swift */,
 				A7B22E2C1E6620C00087A028 /* MovieCell.swift */,
 				A75A67291E6B563200399BEC /* MovieCellViewModel.swift */,
 				A75A672B1E6B56B700399BEC /* SearchViewModel.swift */,
@@ -145,8 +147,6 @@
 				A7B22E031E6620460087A028 /* Assets.xcassets */,
 				A7B22E051E6620460087A028 /* LaunchScreen.storyboard */,
 				A7B22E081E6620460087A028 /* Info.plist */,
-				A75A67271E6B516400399BEC /* MovieButton.swift */,
-				A75A68291E6B998500399BEC /* MovieSearch.swift */,
 			);
 			path = MovieSearch;
 			sourceTree = "<group>";
@@ -482,7 +482,7 @@
 				A75A67301E6B597800399BEC /* SearchViewController.swift in Sources */,
 				A7B22E2D1E6620C00087A028 /* MovieCell.swift in Sources */,
 				A75A67281E6B516400399BEC /* MovieButton.swift in Sources */,
-				A75A682A1E6B998500399BEC /* MovieSearch.swift in Sources */,
+				A75A682A1E6B998500399BEC /* APIClient.swift in Sources */,
 				A75A672C1E6B56B700399BEC /* SearchViewModel.swift in Sources */,
 				A75A682C1E6BAA3D00399BEC /* MovieControllerDataSource.swift in Sources */,
 				A75A672A1E6B563200399BEC /* MovieCellViewModel.swift in Sources */,
