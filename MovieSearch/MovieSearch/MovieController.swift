@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 private let reuseIdentifier = "movieCell"
 
@@ -18,6 +19,8 @@ class MovieViewController: UICollectionViewController {
         }
     }
     let layout = UICollectionViewFlowLayout()
+    
+    // var movies = Results<Movie>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,8 +38,7 @@ extension MovieViewController {
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return datasource.numberOfSections
     }
-
-
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return datasource.count
     }

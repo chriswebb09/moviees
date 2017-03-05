@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import Realm 
 
 protocol UserProtocol {
     var username: String { get set }
@@ -38,5 +39,25 @@ class Movie: Object {
     dynamic var posterImageURL = ""
     dynamic var favorite: Bool = false
     var cast = List<RealmString>()
+    
+    required init() {
+        super.init()
+    }
+    
+    required init(realm: RLMRealm, schema: RLMObjectSchema) {
+        super.init(realm: realm, schema: schema)
+    }
+    
+    required init(value: Any, schema: RLMSchema) {
+        super.init(value: value, schema: schema)
+    }
+    
+    init(title: String, year: String, director: String, cast: [String], genre: [String], imdbID: String, posterURL: String) {
+        self.title = title
+        self.releaseDate = year
+        self.imdbID = imdbID
+        self.posterImageURL = posterURL
+        super.init()
+    }
 }
 

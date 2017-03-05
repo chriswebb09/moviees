@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import RealmSwift
 
 class SearchViewController: UIViewController {
+    
+    let realm = try! Realm()
+    var api = APIClient()
     
     @IBOutlet var searchView: SearchView! {
         didSet {
@@ -28,6 +32,10 @@ class SearchViewController: UIViewController {
 extension SearchViewController {
     
     @IBAction func search(_ sender: Any) {
+        api.sendAPICall(fromUrlString: "http://www.omdbapi.com/?s=batman&page=1", completion: { movie in
+            print(movie)
+        })
+       // api.sendAPICall(fromUrlString:"http://www.omdbapi.com/?s=batman&page=1")
         // implement search functionality
     }
     
