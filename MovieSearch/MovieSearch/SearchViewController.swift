@@ -17,8 +17,10 @@ class SearchViewController: UIViewController {
         view = searchView
         view.layoutSubviews()
     }
-    
-    
+}
+
+extension SearchViewController {
+
     @IBAction func search(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let vc = storyboard.instantiateViewController(withIdentifier: "movieVC") as! MovieViewController
