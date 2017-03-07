@@ -13,12 +13,13 @@ class DataParser {
     func parseData(data: [[String: String]]) -> [Movie] {
         var allMovies = [Movie]()
         
-        data.forEach { [weak self] finalData in
+        data.forEach { finalData in
             if finalData["Type"] == "movie" {
                 guard let title = finalData["Title"] else { return }
                 guard let year = finalData["Year"] else { return }
                 guard let imdbID = finalData["imdbID"] else { return }
                 guard let posterURL = finalData["Poster"] else { return }
+                
                 let movie = Movie(title: title,
                                   year: year,
                                   director: "none",

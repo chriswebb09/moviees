@@ -65,5 +65,9 @@ class Movie: Object {
         self.posterImageURL = posterURL
         super.init()
     }
+    
+    override static func primaryKey() -> String? {
+        return "title"
+    }
 }
 

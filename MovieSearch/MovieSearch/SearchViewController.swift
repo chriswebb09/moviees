@@ -33,14 +33,17 @@ class SearchViewController: UIViewController {
 extension SearchViewController {
     
     @IBAction func search(_ sender: Any) {
-        api.sendAPICall(fromUrlString: "http://www.omdbapi.com/?s=batman&page=1") { movie in
-          print("fetching data")
+        if let searchText = searchView.searchField, let searchString = searchText.text {
+            api.sendAPICall(from: "http://www.omdbapi.com/?s=\(searchString)&page=1") { movie in
+                print("fetching data")
+            }
         }
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! MovieViewController
-        destinationVC.title = searchView.searchField.text
+        destinationVC.title = "Search term: \(searchView.searchField.text!)"
         destinationVC.navigationController?.navigationBar.topItem?.title = searchView.searchField.text
         destinationVC.setMovies()
      }

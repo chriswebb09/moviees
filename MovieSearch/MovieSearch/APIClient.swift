@@ -34,6 +34,7 @@ final class APIClient {
             completion(data, response, error)
         }).resume()
     }
+    
     func downloadImage(url: URL, handler: @escaping (Data) -> Void) {
         print("Download Started")
         getDataFromUrl(url: url) { data, response, error in
@@ -54,25 +55,37 @@ final class APIClient {
 
 extension APIClient {
     
-    public func sendAPICall(fromUrlString:String, completion: @escaping ([Movie], Int) -> Void) {
+    public func sendAPICall(from urlString: String, completion: @escaping ([Movie], Int) -> Void) {
         let parse = DataParser()
-        let url = URL(string: fromUrlString)!
+        let urlEncoded = urlString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
+        let url = URL(string: urlEncoded!)!
         var allMovies: [Movie]!
+        
         getDataFromUrl(url: url) { data, response, error in
             guard let data = data else { return }
+
             do {
                 let result = try? JSONSerialization.jsonObject(with: data, options:[]) as! [String:AnyObject]
                 let dataResponse = result?["Search"] as AnyObject
-                let searchData = dataResponse as! [[String:String]]
+                if dataResponse != nil {
+                    let searchData = dataResponse as! [[String: String]]
+                
+                
+                if allMovies != nil {
+                    allMovies.removeAll()
+                }
                 allMovies = parse.parseData(data: searchData)
                 allMovies.forEach { movie in
                     self.downloadImage(url: URL(string: movie.posterImageURL)!, handler: { data in
                         movie.image = data
                         if let realm = try? Realm() {
+                           
+                            
+                            
                             self.movies = realm.objects(Movie.self)
                             if !(self.movies.contains(movie)) {
                                 try! realm.write {
-                                    realm.add(movie)
+                                    realm.add(movie, update: true)
                                 }
                                 allMovies.append(movie)
                             }
@@ -80,6 +93,10 @@ extension APIClient {
                         }
                     })
                 }
+                }
+                
+            } catch {
+                print("error")
             }
         }
     }
