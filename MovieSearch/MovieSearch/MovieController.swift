@@ -13,11 +13,8 @@ private let reuseIdentifier = "movieCell"
 
 class MovieViewController: UICollectionViewController {
     
-    var dataSourceForSearchResults:[Movie]? {
+    var dataSourceForSearchResults: [Movie]? {
         didSet {
-            dataSourceForSearchResults?.forEach {
-                print($0.title)
-            }
             DispatchQueue.main.async {
                 self.collectionView?.reloadData()
             }
@@ -42,7 +39,7 @@ class MovieViewController: UICollectionViewController {
     }
     
     var searchBarActive: Bool = false
-    var dataSource:[Movie]?
+    var dataSource: [Movie]?
     var moviees: Results<Movie>!
     var backgroundQueue = DispatchQueue(label: "com.movies", qos: .background)
     
