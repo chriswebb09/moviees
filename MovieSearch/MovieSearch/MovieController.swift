@@ -48,7 +48,6 @@ class MovieViewController: UICollectionViewController {
     
     let searchController = UISearchController(searchResultsController: nil)
     let layout = UICollectionViewFlowLayout()
-    let realm = try! Realm()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -196,23 +195,14 @@ extension MovieViewController {
     
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         if let cell = collectionView.cellForItem(at: indexPath) as? MovieCell {
-            cell.isSelected = true
-            cell.selectedStyle()
+            cell.isSelected = cell.selectedStyle()
         }
         return true
     }
     
     override func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? MovieCell {
-            cell.isSelected = false
-            cell.selectedStyle()
-        }
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) as? MovieCell {
-            cell.isSelected = false
-            cell.selectedStyle()
+            cell.isSelected = cell.selectedStyle()
         }
     }
 }
@@ -221,9 +211,7 @@ extension MovieViewController: UISearchBarDelegate {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionElementKindSectionHeader:
-            let reusableview = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader,
-                                                                               withReuseIdentifier:  "CollectionViewHeader",
-                                                                               for: indexPath) as! HeaderReusableView
+            let reusableview = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier:  "CollectionViewHeader", for: indexPath) as! HeaderReusableView
             reusableview.frame = CGRect(x:0 , y:0, width: self.view.frame.width, height:50)
             reusableview.searchBar = searchController.searchBar
             searchController.searchResultsUpdater = self

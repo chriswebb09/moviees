@@ -63,7 +63,7 @@ class MovieCell: UICollectionViewCell {
         layer.borderWidth = isSelected == true ? 2.0 : 1.0
         layer.borderColor = UIColor.black.cgColor
         posterView.isHidden = isSelected
-        return isSelected
+        return !isSelected
     }
     
     func outlineCell(cell: MovieCell) {
