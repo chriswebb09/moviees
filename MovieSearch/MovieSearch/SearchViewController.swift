@@ -40,6 +40,10 @@ extension SearchViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! MovieViewController
         destinationVC.title = "Search term: \(searchView.searchField.text!)"
+//        if let nav = destinationVC.navigationController, let item = nav.navigationBar.topItem {
+//            
+//            //nav.navigationBar
+//        }
         destinationVC.navigationController?.navigationBar.topItem?.title = searchView.searchField.text
         if let searchText = searchView.searchField, let searchString = searchText.text {
             let encoded = searchString.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)

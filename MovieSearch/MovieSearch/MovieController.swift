@@ -37,12 +37,8 @@ class MovieViewController: UICollectionViewController {
             }
         }
     }
-    
     var searchBarActive: Bool = false
-    var dataSource: [Movie]?
     var moviees: Results<Movie>!
-    var backgroundQueue = DispatchQueue(label: "com.movies", qos: .background)
-    
     let searchController = UISearchController(searchResultsController: nil)
     let layout = UICollectionViewFlowLayout()
     
@@ -51,10 +47,16 @@ class MovieViewController: UICollectionViewController {
         collectionView?.delegate = self
         collectionView?.dataSource = self
         definesPresentationContext = true
-        edgesForExtendedLayout = []
-        collectionView!.collectionViewLayout = layout
-        datasource.layoutCells(layout: layout)
-        collectionView!.backgroundColor = .lightGray
+        setupUI()
+    }
+    
+    func setupUI() {
+        if let collectView = collectionView {
+            edgesForExtendedLayout = []
+            collectView.collectionViewLayout = layout
+            datasource.layoutCells(layout: layout)
+            collectView.backgroundColor = .lightGray
+        }
     }
 }
 
@@ -76,20 +78,20 @@ extension MovieViewController {
     }
     
     func setupCell(indexPath: IndexPath, cell: MovieCell) {
-        if ((movies?.count)! >= indexPath.row) && (indexPath.row > 0) {
-            if let movie = movies?[indexPath.row] {
+        if let movieList = movies {
+            if movieList.count >= indexPath.row && indexPath.row > 0 {
                 DispatchQueue.main.async {
-                    cell.setupCell(movie: movie)
+                    cell.setupCell(movie: movieList[indexPath.row])
                 }
             }
         }
     }
     
     func setupFilteredCell(indexPath: IndexPath, cell: MovieCell) {
-        if (dataSourceForSearchResults?.count)! >= indexPath.row && indexPath.row >= 0 {
-            if let movie = dataSourceForSearchResults?[indexPath.row] {
+        if let filteredMovies = dataSourceForSearchResults {
+            if filteredMovies.count >= indexPath.row && indexPath.row >= 0 {
                 DispatchQueue.main.async {
-                    cell.setupCell(movie: movie)
+                    cell.setupCell(movie: filteredMovies[indexPath.row])
                 }
             }
         }
@@ -129,18 +131,22 @@ extension MovieViewController: UISearchControllerDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBarActive = true
-        if (!(searchBar.text?.isEmpty)!) {
-            DispatchQueue.main.async {
-                self.filterContentForSearchText(searchText: searchBar.text!)
+        if let barText = searchBar.text {
+            if !barText.isEmpty {
+                DispatchQueue.main.async {
+                    self.filterContentForSearchText(searchText: barText)
+                }
             }
         }
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchBarActive = true
-        if (!searchText.isEmpty) {
-            DispatchQueue.main.async {
-                self.filterContentForSearchText(searchText: searchText)
+        if let barText = searchBar.text {
+            if !barText.isEmpty {
+                DispatchQueue.main.async {
+                    self.filterContentForSearchText(searchText: barText)
+                }
             }
         }
     }

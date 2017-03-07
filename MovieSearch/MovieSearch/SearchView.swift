@@ -10,6 +10,8 @@ import UIKit
 
 class SearchView: UIView {
     
+    
+    
     @IBOutlet weak var searchField: UITextField! {
         didSet {
             
