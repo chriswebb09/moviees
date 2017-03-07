@@ -11,7 +11,7 @@ import RealmSwift
 
 private let reuseIdentifier = "movieCell"
 
-class MovieViewController: UICollectionViewController, UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating {
+class MovieViewController: UICollectionViewController {
     
     var dataSourceForSearchResults:[Movie]? {
         didSet {
@@ -76,12 +76,27 @@ extension MovieViewController {
                 return data.count
             }
         }
-        if datasource.count == 0 {
-            DispatchQueue.main.async {
-                collectionView.reloadData()
+        return datasource.count
+    }
+    
+    func setupCell(indexPath: IndexPath, cell: MovieCell) {
+        if ((movies?.count)! >= indexPath.row) && (indexPath.row > 0) {
+            if let movie = movies?[indexPath.row] {
+                DispatchQueue.main.async {
+                    cell.setupCell(movie: movie)
+                }
             }
         }
-        return datasource.count
+    }
+    
+    func setupFilteredCell(indexPath: IndexPath, cell: MovieCell) {
+        if (dataSourceForSearchResults?.count)! >= indexPath.row && indexPath.row >= 0 {
+            if let movie = dataSourceForSearchResults?[indexPath.row] {
+                DispatchQueue.main.async {
+                    cell.setupCell(movie: movie)
+                }
+            }
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -90,30 +105,9 @@ extension MovieViewController {
         if cell.image == nil {
             cell.activityIndicator.startAnimating()
         }
-        
         if searchBarActive == false {
-            
-            if ((movies?.count)! >= indexPath.row) && (indexPath.row > 0) {
-                if let movie = movies?[indexPath.row] {
-                    DispatchQueue.main.async {
-                        cell.setupCell(movie: movie)
-                    }
-                }
-            }
-            if cell.image != nil {
-                DispatchQueue.main.async {
-                    cell.activityIndicator.isHidden = true
-                    cell.activityIndicator.stopAnimating()
-                }
-            }
-            return cell
-        } else {
-            if (dataSourceForSearchResults?.count)! >= indexPath.row && indexPath.row > 0 {
-                if let movie = dataSourceForSearchResults?[indexPath.row] {
-                    DispatchQueue.main.async {
-                        cell.setupCell(movie: movie)
-                    }
-                }
+            DispatchQueue.main.async { [weak self] in
+                self?.setupCell(indexPath: indexPath, cell: cell)
             }
             if cell.image != nil {
                 DispatchQueue.main.async {
@@ -122,12 +116,23 @@ extension MovieViewController {
                 }
             }
         }
+        if searchBarActive == true {
+            setupFilteredCell(indexPath: indexPath, cell: cell)
+            if cell.image != nil {
+                DispatchQueue.main.async {
+                    cell.activityIndicator.isHidden = true
+                    cell.activityIndicator.stopAnimating()
+                }
+            }
+            
+        }
         return cell
     }
+}
+
+extension MovieViewController {
     
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        searchBar.setShowsCancelButton(true, animated: true)
-    }
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return datasource.sizeForItemAt
@@ -144,7 +149,11 @@ extension MovieViewController {
 
 //MARK: - Search
 
-extension MovieViewController {
+extension MovieViewController: UISearchControllerDelegate {
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBarActive = true
@@ -190,7 +199,19 @@ extension MovieViewController {
     }
 }
 
-
+extension MovieViewController: UISearchResultsUpdating {
+    
+    func filterContentForSearchText(searchText: String) {
+        DispatchQueue.main.async { [weak self] in
+            self?.dataSourceForSearchResults = Filter.filteredBy(filterFrom: (self?.datasource.movies)!, term: searchText)
+        }
+        
+    }
+    
+    public func updateSearchResults(for searchController: UISearchController) {
+        print("update")
+    }
+}
 
 // MARK: UICollectionViewDelegate
 
@@ -222,6 +243,9 @@ extension MovieViewController {
         }
     }
     
+}
+
+extension MovieViewController: UISearchBarDelegate {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         switch kind {
@@ -239,13 +263,5 @@ extension MovieViewController {
         }
     }
     
-    func filterContentForSearchText(searchText: String) {
-        let predicate = NSPredicate(format: "SELF BEGINSWITH %@", searchText)
-        let searchDataSource = datasource.movies.filter { predicate.evaluate(with: $0.title) }
-        dataSourceForSearchResults = searchDataSource
-    }
     
-    public func updateSearchResults(for searchController: UISearchController) {
-        print("update")
-    }
 }
