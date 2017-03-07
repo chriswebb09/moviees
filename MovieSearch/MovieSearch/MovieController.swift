@@ -10,15 +10,31 @@ import UIKit
 import RealmSwift
 
 private let reuseIdentifier = "movieCell"
-typealias FinishedDownload = () -> ()
 
 class MovieViewController: UICollectionViewController, UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating {
     
     var dataSource:[Movie]?
     
+    var searchBarActive: Bool = false
+    
     let searchController = UISearchController(searchResultsController: nil)
     var dataSourceForSearchResult:[String]?
-    var dataSourceForSearchResults:[Movie]?
+    var dataSourceForSearchResults:[Movie]? {
+        didSet {
+            if (dataSourceForSearchResults?.count)! >= 0 {
+                movies = dataSourceForSearchResults
+            } else {
+                movies = datasource.movies
+            }
+            
+            dataSourceForSearchResults?.forEach {
+                print($0.title)
+            }
+            DispatchQueue.main.async {
+                self.collectionView?.reloadData()
+            }
+        }
+    }
     let realm = try! Realm()
     var moviees: Results<Movie>!
     
@@ -30,7 +46,6 @@ class MovieViewController: UICollectionViewController, UISearchBarDelegate, UISe
             DispatchQueue.main.async {
                 self.collectionView?.reloadData()
             }
-            
         }
     }
     
@@ -53,7 +68,6 @@ class MovieViewController: UICollectionViewController, UISearchBarDelegate, UISe
         collectionView!.collectionViewLayout = layout
         datasource.layoutCells(layout: layout)
         collectionView!.backgroundColor = .lightGray
-        
     }
 }
 
@@ -75,16 +89,13 @@ extension MovieViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MovieCell
-        
-        
         cell.layoutSubviews()
         if cell.image == nil {
             cell.activityIndicator.startAnimating()
         }
-        if ((self.movies?.count)! >= indexPath.row) && (indexPath.row > 0) {
-            if let movie = self.movies?[indexPath.row] {
+        if ((movies?.count)! >= indexPath.row) && (indexPath.row > 0) {
+            if let movie = movies?[indexPath.row] {
                 DispatchQueue.main.async {
                     cell.setupCell(movie: movie)
                 }
@@ -96,11 +107,12 @@ extension MovieViewController {
                 cell.activityIndicator.stopAnimating()
             }
         }
-        
-        
         return cell
     }
     
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return datasource.sizeForItemAt
@@ -113,35 +125,61 @@ extension MovieViewController {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumItemSpacingForSectionAt section: Int) -> CGFloat {
         return datasource.miniumItemSpacing
     }
-    
-    
-    
 }
 
 //MARK: - Search
 
 extension MovieViewController {
     
-    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        self.filterContentForSearchText(searchText: searchBar.text!)
-        self.collectionView?.reloadData()
-        print(searchBar.text)
         if (!(searchBar.text?.isEmpty)!) {
-            self.collectionView?.reloadData()
+            DispatchQueue.main.async {
+                self.filterContentForSearchText(searchText: searchBar.text!)
+                if (self.dataSourceForSearchResults?.count)! >= 0 {
+                    self.dataSourceForSearchResults = self.datasource.movies
+                }
+                
+            }
+            // print(searchBar.text)
         }
-        print(dataSourceForSearchResult)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        self.filterContentForSearchText(searchText: searchText)
-        print(dataSourceForSearchResults)
-        self.collectionView?.reloadData()
-        if (searchText.isEmpty) {
-            self.collectionView?.reloadData()
+        if (!searchText.isEmpty) {
+            DispatchQueue.main.async {
+                self.filterContentForSearchText(searchText: searchText)
+                if (self.dataSourceForSearchResults?.count)! >= 0 {
+                    self.dataSourceForSearchResults = self.datasource.movies
+                }
+            }
+            
         }
     }
+    
+    func cancelSearching(searchBar: UISearchBar) {
+        searchBarActive = false
+        searchBar.resignFirstResponder()
+        searchBar.text = ""
+    }
+    
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        cancelSearching(searchBar: searchBar)
+        collectionView?.reloadData()
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchBarActive = true
+        view.endEditing(true)
+    }
+    
+    
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+        searchBarActive = false
+        searchBar.setShowsCancelButton(false, animated: false)
+    }
 }
+
 
 
 // MARK: UICollectionViewDelegate
@@ -181,7 +219,6 @@ extension MovieViewController {
         switch kind {
         case UICollectionElementKindSectionHeader:
             let reusableview = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier:  "CollectionViewHeader", for: indexPath) as! HeaderReusableView
-            
             reusableview.frame = CGRect(x:0 , y:0, width:self.view.frame.width, height:50)
             reusableview.searchBar = searchController.searchBar
             searchController.searchResultsUpdater = self
@@ -189,21 +226,21 @@ extension MovieViewController {
             definesPresentationContext = true
             reusableview.searchBar.delegate = self
             return reusableview
-            
-            
-        default:  fatalError("Unexpected element kind")
+        default:
+            fatalError("Unexpected element kind")
         }
     }
     
     func filterContentForSearchText(searchText: String) {
-        self.dataSourceForSearchResults = self.datasource.movies.filter({ (movie: Movie) -> Bool in
-            return movie.title.contains(searchText)
-        })
-        
+        let predicate = NSPredicate(format: "SELF BEGINSWITH %@", searchText)
+        let searchDataSource = datasource.movies.filter { predicate.evaluate(with: $0.title) }
+        dataSourceForSearchResults = searchDataSource
+        if searchText.characters.count >= 0 {
+            self.movies = datasource.movies
+        }
     }
     
     public func updateSearchResults(for searchController: UISearchController) {
         print("update")
     }
-    
 }
