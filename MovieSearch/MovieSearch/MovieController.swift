@@ -41,14 +41,14 @@ class MovieViewController: UICollectionViewController {
         }
     }
     
-    let searchController = UISearchController(searchResultsController: nil)
-    let layout = UICollectionViewFlowLayout()
-    let realm = try! Realm()
-    
     var searchBarActive: Bool = false
     var dataSource:[Movie]?
     var moviees: Results<Movie>!
     var backgroundQueue = DispatchQueue(label: "com.movies", qos: .background)
+    
+    let searchController = UISearchController(searchResultsController: nil)
+    let layout = UICollectionViewFlowLayout()
+    let realm = try! Realm()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,22 +109,15 @@ extension MovieViewController {
             DispatchQueue.main.async { [weak self] in
                 self?.setupCell(indexPath: indexPath, cell: cell)
             }
-            if cell.image != nil {
-                DispatchQueue.main.async {
-                    cell.activityIndicator.isHidden = true
-                    cell.activityIndicator.stopAnimating()
-                }
-            }
         }
         if searchBarActive == true {
             setupFilteredCell(indexPath: indexPath, cell: cell)
-            if cell.image != nil {
-                DispatchQueue.main.async {
-                    cell.activityIndicator.isHidden = true
-                    cell.activityIndicator.stopAnimating()
-                }
+        }
+        if cell.image != nil {
+            DispatchQueue.main.async {
+                cell.activityIndicator.isHidden = true
+                cell.activityIndicator.stopAnimating()
             }
-            
         }
         return cell
     }
@@ -205,7 +198,6 @@ extension MovieViewController: UISearchResultsUpdating {
         DispatchQueue.main.async { [weak self] in
             self?.dataSourceForSearchResults = Filter.filteredBy(filterFrom: (self?.datasource.movies)!, term: searchText)
         }
-        
     }
     
     public func updateSearchResults(for searchController: UISearchController) {
@@ -242,26 +234,25 @@ extension MovieViewController {
             cell.selectedStyle()
         }
     }
-    
 }
 
 extension MovieViewController: UISearchBarDelegate {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
         switch kind {
         case UICollectionElementKindSectionHeader:
-            let reusableview = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier:  "CollectionViewHeader", for: indexPath) as! HeaderReusableView
-            reusableview.frame = CGRect(x:0 , y:0, width:self.view.frame.width, height:50)
+            let reusableview = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader,
+                                                                               withReuseIdentifier:  "CollectionViewHeader",
+                                                                               for: indexPath) as! HeaderReusableView
+            reusableview.frame = CGRect(x:0 , y:0, width: self.view.frame.width, height:50)
             reusableview.searchBar = searchController.searchBar
             searchController.searchResultsUpdater = self
             searchController.dimsBackgroundDuringPresentation = false
             definesPresentationContext = true
             reusableview.searchBar.delegate = self
             return reusableview
+            
         default:
             fatalError("Unexpected element kind")
         }
     }
-    
-    
 }
