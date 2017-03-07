@@ -20,6 +20,7 @@ class MovieCell: UICollectionViewCell {
         didSet {
             titleLabel.backgroundColor = .black
             titleLabel.textColor = .white
+            titleLabel.numberOfLines = 0
             titleLabel.sizeToFit()
         }
     }
@@ -36,8 +37,8 @@ class MovieCell: UICollectionViewCell {
     
     @discardableResult
     func selectedStyle() -> Bool {
-        backgroundColor = isSelected ? .orange : .darkGray
-        layer.borderWidth = isSelected ? 2.0 : 1.0
+        backgroundColor = isSelected == true ? .orange : .darkGray
+        layer.borderWidth = isSelected == true ? 2.0 : 1.0
         layer.borderColor = UIColor.black.cgColor
         posterView.isHidden = isSelected
         return isSelected

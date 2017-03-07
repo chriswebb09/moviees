@@ -57,11 +57,12 @@ extension APIClient {
     
     public func sendAPICall(from urlString: String, completion: @escaping ([Movie], Int) -> Void) {
         let parse = DataParser()
-        guard urlString.characters.count <= 0 else { return }
         let url = URL(string: urlString)!
         var allMovies: [Movie]!
+        
         getDataFromUrl(url: url) { data, response, error in
             guard let data = data else { return }
+            
             do {
                 let result = try? JSONSerialization.jsonObject(with: data, options:[]) as! [String:AnyObject]
                 let dataResponse = result?["Search"] as AnyObject
@@ -82,7 +83,7 @@ extension APIClient {
                         }
                     })
                 }
-            }
+            } 
         }
     }
 }

@@ -85,6 +85,7 @@ extension MovieViewController {
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         let cell = collectionView.cellForItem(at: indexPath) as! MovieCell
         cell.isSelected = true
+        cell.selectedStyle()
         return true
     }
     
