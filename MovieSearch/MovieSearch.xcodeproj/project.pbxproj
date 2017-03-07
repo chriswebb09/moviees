@@ -11,6 +11,7 @@
 		6810133C54F28B690D8FDB6A /* Pods_MovieSearch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 404780F0AD6B354FB499B272 /* Pods_MovieSearch.framework */; };
 		A70F98351E6E2AEA0050AE3F /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70F98341E6E2AEA0050AE3F /* SearchField.swift */; };
 		A70F98371E6E42090050AE3F /* DataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70F98361E6E42090050AE3F /* DataParser.swift */; };
+		A7481BD01E6E6D2700312BDC /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A7481BCF1E6E6D2700312BDC /* Info.plist */; };
 		A75A67281E6B516400399BEC /* MovieButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75A67271E6B516400399BEC /* MovieButton.swift */; };
 		A75A672A1E6B563200399BEC /* MovieCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75A67291E6B563200399BEC /* MovieCellViewModel.swift */; };
 		A75A672C1E6B56B700399BEC /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75A672B1E6B56B700399BEC /* SearchViewModel.swift */; };
@@ -57,6 +58,7 @@
 		97699F039921FC6AFA49736E /* Pods-MovieSearchTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieSearchTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MovieSearchTests/Pods-MovieSearchTests.release.xcconfig"; sourceTree = "<group>"; };
 		A70F98341E6E2AEA0050AE3F /* SearchField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchField.swift; sourceTree = "<group>"; };
 		A70F98361E6E42090050AE3F /* DataParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataParser.swift; sourceTree = "<group>"; };
+		A7481BCF1E6E6D2700312BDC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A75A67271E6B516400399BEC /* MovieButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieButton.swift; sourceTree = "<group>"; };
 		A75A67291E6B563200399BEC /* MovieCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCellViewModel.swift; sourceTree = "<group>"; };
 		A75A672B1E6B56B700399BEC /* SearchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
@@ -69,7 +71,6 @@
 		A7B22E011E6620460087A028 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A7B22E031E6620460087A028 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A7B22E061E6620460087A028 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		A7B22E081E6620460087A028 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A7B22E0D1E6620460087A028 /* MovieSearchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieSearchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7B22E111E6620460087A028 /* MovieSearchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchTests.swift; sourceTree = "<group>"; };
 		A7B22E131E6620460087A028 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -152,7 +153,7 @@
 				A7B22E001E6620460087A028 /* Main.storyboard */,
 				A7B22E031E6620460087A028 /* Assets.xcassets */,
 				A7B22E051E6620460087A028 /* LaunchScreen.storyboard */,
-				A7B22E081E6620460087A028 /* Info.plist */,
+				A7481BCF1E6E6D2700312BDC /* Info.plist */,
 			);
 			path = MovieSearch;
 			sourceTree = "<group>";
@@ -317,6 +318,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7481BD01E6E6D2700312BDC /* Info.plist in Resources */,
 				A7B22E071E6620460087A028 /* LaunchScreen.storyboard in Resources */,
 				A7B22E041E6620460087A028 /* Assets.xcassets in Resources */,
 				A7B22E021E6620460087A028 /* Main.storyboard in Resources */,

@@ -34,7 +34,8 @@ extension SearchViewController {
     
     @IBAction func search(_ sender: Any) {
         if let searchText = searchView.searchField, let searchString = searchText.text {
-            api.sendAPICall(from: "http://www.omdbapi.com/?s=\(searchString)&page=1") { movie in
+            let encoded = searchString.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)
+            api.sendAPICall(from: "http://www.omdbapi.com/?s=\(encoded!)&page=1") { movie in
                 print("fetching data")
             }
         }

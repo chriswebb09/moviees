@@ -57,8 +57,8 @@ extension APIClient {
     
     public func sendAPICall(from urlString: String, completion: @escaping ([Movie], Int) -> Void) {
         let parse = DataParser()
-        let urlEncoded = urlString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
-        let url = URL(string: urlEncoded!)!
+        //let urlEncoded = urlString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
+        let url = URL(string: urlString)!
         var allMovies: [Movie]!
         
         getDataFromUrl(url: url) { data, response, error in
