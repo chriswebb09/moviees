@@ -7,13 +7,10 @@
 //
 
 import UIKit
-import Realm
-import RealmSwift
 
 class DataParser {
     
-    func parseData(data: [[String: String]]) {
-        var movies: Results<Movie>!
+    func parseData(data: [[String: String]]) -> [Movie] {
         var allMovies = [Movie]()
         
         data.forEach { [weak self] finalData in
@@ -29,24 +26,10 @@ class DataParser {
                                   genre: ["NONE"],
                                   imdbID: imdbID,
                                   posterURL: posterURL)
-                APIClient().downloadImage(url: URL(string:posterURL)!, handler: { image in
-                    movie.image = NSData(data: UIImageJPEGRepresentation(image,0.9)!) as! Data
-                    if let realm = try? Realm() {
-                        movies = realm.objects(Movie.self)
-                        if !(movies.contains(movie)) {
-                            try! realm.write {
-                                realm.add(movie)
-                            }
-                            allMovies.append(movie)
-                           // realm.refresh()
-                        }
-                        realm.refresh()
-                    }
-                    
-                })
-                
-                
+                allMovies.append(movie)
             }
         }
+        return allMovies
     }
 }
+ 

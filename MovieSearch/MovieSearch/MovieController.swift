@@ -15,6 +15,7 @@ class MovieViewController: UICollectionViewController {
     
     let realm = try! Realm()
     let layout = UICollectionViewFlowLayout()
+    let datasource = MovieControllerDataSource()
     
     var movies = [Movie]() {
         didSet {
@@ -24,8 +25,6 @@ class MovieViewController: UICollectionViewController {
             }
         }
     }
-    
-    var datasource = MovieControllerDataSource()
     
     override func viewDidLoad() {
         super.viewDidLoad()
