@@ -26,13 +26,9 @@ class MovieViewController: UICollectionViewController {
     }
     
     var datasource = MovieControllerDataSource()
-       
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(movies)
-        
         edgesForExtendedLayout = []
         collectionView!.collectionViewLayout = layout
         datasource.layoutCells(layout: layout)
