@@ -16,6 +16,19 @@ class MovieCell: UICollectionViewCell {
         }
     }
     
+    var image: UIImage! {
+        willSet {
+            print("IMAGE")
+        }
+    }
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView! {
+        didSet {
+            self.activityIndicator.hidesWhenStopped = true
+            self.activityIndicator.color = .white
+        }
+    }
+    
     @IBOutlet weak var titleLabel: UILabel! {
         didSet {
             titleLabel.backgroundColor = .black
@@ -33,6 +46,15 @@ class MovieCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+    }
+    
+    func setupCell(movie: Movie) {
+        titleLabel.text = movie.title
+        DispatchQueue.main.async {
+            self.image = UIImage(data: movie.image)
+            self.posterView.image = self.image
+        }
+        
     }
     
     @discardableResult

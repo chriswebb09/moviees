@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import Realm
+import RealmSwift
 
 class MovieControllerDataSource {
+    private let realm = try! Realm()
     
     var movies = [Movie]() 
     
@@ -42,4 +45,10 @@ class MovieControllerDataSource {
     func setMovieResults() -> [String] {
         return ["new result"]
     }
+    
+    
+    func getAll() -> [Movie] {
+        return realm.objects(Movie.self).map { $0 }
+    }
+    
 }

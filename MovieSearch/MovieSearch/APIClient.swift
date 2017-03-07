@@ -62,26 +62,32 @@ extension APIClient {
         
         getDataFromUrl(url: url) { data, response, error in
             guard let data = data else { return }
-            
             do {
                 let result = try? JSONSerialization.jsonObject(with: data, options:[]) as! [String:AnyObject]
                 let dataResponse = result?["Search"] as AnyObject
                 let searchData = dataResponse as! [[String: String]]
                 allMovies = parse.parseData(data: searchData)
+                
                 allMovies.forEach { movie in
-                    self.downloadImage(url: URL(string: movie.posterImageURL)!, handler: { data in
-                        movie.image = data
+                    self.downloadImage(url: URL(string: movie.posterImageURL)!) { data in
+                        DispatchQueue.main.async {
+                            movie.image = data
+                        
+                        
                         if let realm = try? Realm() {
                             self.movies = realm.objects(Movie.self)
                             if !(self.movies.contains(movie)) {
                                 try! realm.write {
                                     realm.add(movie, update: true)
+                                    realm.refresh()
                                 }
+                                
                                 allMovies.append(movie)
                             }
-                            realm.refresh()
+                            }
                         }
-                    })
+                    }
+                    completion(allMovies, 1)
                 }
             } 
         }

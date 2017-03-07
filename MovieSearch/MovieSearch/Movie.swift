@@ -25,6 +25,7 @@ class MovieUser: Object, UserProtocol {
     dynamic var firstName = ""
     dynamic var lastName = ""
     dynamic var joinDate = ""
+    
     var favoriteMovies = List<Movie>()
 }
 
@@ -43,9 +44,10 @@ class Movie: Object {
     dynamic var imdbID: String = ""
     dynamic var posterImageURL = ""
     dynamic var favorite: Bool = false
-    var cast = List<RealmString>()
     dynamic var image = RealmImage().imageData
     
+    var cast = List<RealmString>()
+
     required init() {
         super.init()
     }

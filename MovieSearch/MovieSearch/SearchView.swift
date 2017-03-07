@@ -12,7 +12,7 @@ class SearchView: UIView {
     
     @IBOutlet weak var searchField: UITextField! {
         didSet {
-            searchField.layer.borderColor = UIColor.blue.cgColor
+            
         }
     }
   
