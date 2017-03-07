@@ -23,7 +23,6 @@ class SearchButton: UIButton {
         get {
             return layer.cornerRadius
         }
-        
         set {
             layer.cornerRadius = newValue
             layer.masksToBounds = newValue > 0

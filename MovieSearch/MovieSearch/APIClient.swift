@@ -57,31 +57,20 @@ extension APIClient {
     
     public func sendAPICall(from urlString: String, completion: @escaping ([Movie], Int) -> Void) {
         let parse = DataParser()
-        //let urlEncoded = urlString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
+        guard urlString.characters.count <= 0 else { return }
         let url = URL(string: urlString)!
         var allMovies: [Movie]!
-        
         getDataFromUrl(url: url) { data, response, error in
             guard let data = data else { return }
-
             do {
                 let result = try? JSONSerialization.jsonObject(with: data, options:[]) as! [String:AnyObject]
                 let dataResponse = result?["Search"] as AnyObject
-                if dataResponse != nil {
-                    let searchData = dataResponse as! [[String: String]]
-                
-                
-                if allMovies != nil {
-                    allMovies.removeAll()
-                }
+                let searchData = dataResponse as! [[String: String]]
                 allMovies = parse.parseData(data: searchData)
                 allMovies.forEach { movie in
                     self.downloadImage(url: URL(string: movie.posterImageURL)!, handler: { data in
                         movie.image = data
                         if let realm = try? Realm() {
-                           
-                            
-                            
                             self.movies = realm.objects(Movie.self)
                             if !(self.movies.contains(movie)) {
                                 try! realm.write {
@@ -93,10 +82,6 @@ extension APIClient {
                         }
                     })
                 }
-                }
-                
-            } catch {
-                print("error")
             }
         }
     }
