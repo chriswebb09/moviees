@@ -13,20 +13,8 @@ private let reuseIdentifier = "movieCell"
 
 class MovieViewController: UICollectionViewController, UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating {
     
-    var dataSource:[Movie]?
-    
-    var searchBarActive: Bool = false
-    
-    let searchController = UISearchController(searchResultsController: nil)
-    var dataSourceForSearchResult:[String]?
     var dataSourceForSearchResults:[Movie]? {
         didSet {
-            if (dataSourceForSearchResults?.count)! >= 0 {
-                movies = dataSourceForSearchResults
-            } else {
-                movies = datasource.movies
-            }
-            
             dataSourceForSearchResults?.forEach {
                 print($0.title)
             }
@@ -35,13 +23,8 @@ class MovieViewController: UICollectionViewController, UISearchBarDelegate, UISe
             }
         }
     }
-    let realm = try! Realm()
-    var moviees: Results<Movie>!
     
-    let layout = UICollectionViewFlowLayout()
-    var backgroundQueue = DispatchQueue(label: "com.movies", qos: .background)
     var datasource = MovieControllerDataSource() {
-        
         didSet {
             DispatchQueue.main.async {
                 self.collectionView?.reloadData()
@@ -58,9 +41,17 @@ class MovieViewController: UICollectionViewController, UISearchBarDelegate, UISe
         }
     }
     
+    let searchController = UISearchController(searchResultsController: nil)
+    let layout = UICollectionViewFlowLayout()
+    let realm = try! Realm()
+    
+    var searchBarActive: Bool = false
+    var dataSource:[Movie]?
+    var moviees: Results<Movie>!
+    var backgroundQueue = DispatchQueue(label: "com.movies", qos: .background)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.dataSourceForSearchResult = [String]()
         collectionView?.delegate = self
         collectionView?.dataSource = self
         definesPresentationContext = true
@@ -80,6 +71,11 @@ extension MovieViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if searchBarActive == true {
+            if let data = dataSourceForSearchResults {
+                return data.count
+            }
+        }
         if datasource.count == 0 {
             DispatchQueue.main.async {
                 collectionView.reloadData()
@@ -94,17 +90,38 @@ extension MovieViewController {
         if cell.image == nil {
             cell.activityIndicator.startAnimating()
         }
-        if ((movies?.count)! >= indexPath.row) && (indexPath.row > 0) {
-            if let movie = movies?[indexPath.row] {
-                DispatchQueue.main.async {
-                    cell.setupCell(movie: movie)
+        
+        if searchBarActive == false {
+            
+            if ((movies?.count)! >= indexPath.row) && (indexPath.row > 0) {
+                if let movie = movies?[indexPath.row] {
+                    DispatchQueue.main.async {
+                        cell.setupCell(movie: movie)
+                    }
                 }
             }
-        }
-        if cell.image != nil {
-            DispatchQueue.main.async {
-                cell.activityIndicator.isHidden = true
-                cell.activityIndicator.stopAnimating()
+            if cell.image != nil {
+                DispatchQueue.main.async {
+                    cell.activityIndicator.isHidden = true
+                    cell.activityIndicator.stopAnimating()
+                }
+            }
+            return cell
+        } else {
+            
+            if (dataSourceForSearchResults?.count)! >= indexPath.row && indexPath.row > 0 {
+                if let movie = dataSourceForSearchResults?[indexPath.row] {
+                    DispatchQueue.main.async {
+                        cell.setupCell(movie: movie)
+                    }
+                }
+            }
+            
+            if cell.image != nil {
+                DispatchQueue.main.async {
+                    cell.activityIndicator.isHidden = true
+                    cell.activityIndicator.stopAnimating()
+                }
             }
         }
         return cell
@@ -132,27 +149,20 @@ extension MovieViewController {
 extension MovieViewController {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBarActive = true
         if (!(searchBar.text?.isEmpty)!) {
             DispatchQueue.main.async {
                 self.filterContentForSearchText(searchText: searchBar.text!)
-                if (self.dataSourceForSearchResults?.count)! >= 0 {
-                    self.dataSourceForSearchResults = self.datasource.movies
-                }
-                
             }
-            // print(searchBar.text)
         }
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchBarActive = true
         if (!searchText.isEmpty) {
             DispatchQueue.main.async {
                 self.filterContentForSearchText(searchText: searchText)
-                if (self.dataSourceForSearchResults?.count)! >= 0 {
-                    self.dataSourceForSearchResults = self.datasource.movies
-                }
             }
-            
         }
     }
     
@@ -165,7 +175,10 @@ extension MovieViewController {
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         cancelSearching(searchBar: searchBar)
-        collectionView?.reloadData()
+        DispatchQueue.main.async {
+            self.collectionView?.reloadData()
+        }
+        
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
@@ -235,9 +248,6 @@ extension MovieViewController {
         let predicate = NSPredicate(format: "SELF BEGINSWITH %@", searchText)
         let searchDataSource = datasource.movies.filter { predicate.evaluate(with: $0.title) }
         dataSourceForSearchResults = searchDataSource
-        if searchText.characters.count >= 0 {
-            self.movies = datasource.movies
-        }
     }
     
     public func updateSearchResults(for searchController: UISearchController) {
