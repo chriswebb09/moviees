@@ -13,6 +13,7 @@ class SearchViewController: UIViewController {
     
     let realm = try! Realm()
     var api = APIClient()
+    var movies: [Movie] = [Movie]() 
     
     @IBOutlet var searchView: SearchView! {
         didSet {
@@ -33,7 +34,7 @@ extension SearchViewController {
     
     @IBAction func search(_ sender: Any) {
         api.sendAPICall(fromUrlString: "http://www.omdbapi.com/?s=batman&page=1") { movie in
-            print(movie)
+          print("fetching data")
         }
     }
     
@@ -41,5 +42,7 @@ extension SearchViewController {
         let destinationVC = segue.destination as! MovieViewController
         destinationVC.title = searchView.searchField.text
         destinationVC.navigationController?.navigationBar.topItem?.title = searchView.searchField.text
-    }
+        destinationVC.setMovies()
+     }
+    
 }

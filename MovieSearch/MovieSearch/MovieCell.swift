@@ -26,23 +26,20 @@ class MovieCell: UICollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
-            posterView.isHidden = isSelected
-            if isSelected {
-                backgroundColor = .orange
-                selectedStyle()
-            }
+            selectedStyle()
         }
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        backgroundColor = .darkGray
     }
     
     @discardableResult
     func selectedStyle() -> Bool {
-        layer.borderWidth = 2.0
+        backgroundColor = isSelected ? .orange : .darkGray
+        layer.borderWidth = isSelected ? 2.0 : 1.0
         layer.borderColor = UIColor.black.cgColor
+        posterView.isHidden = isSelected
         return isSelected
     }
     

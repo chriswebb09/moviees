@@ -10,12 +10,26 @@ import UIKit
 
 class MovieControllerDataSource {
     
+    var movies = [Movie]() 
+    
     var count: Int {
-        return 10
+        return movies.count
     }
     
     var numberOfSections: Int {
         return 1
+    }
+    
+    var miniumItemSpacing: CGFloat {
+        return 20
+    }
+    
+    var sizeForItemAt: CGSize {
+        return CGSize(width: UIScreen.main.bounds.height, height: UIScreen.main.bounds.width/3.5)
+    }
+    
+    var edgeInset: UIEdgeInsets {
+        return UIEdgeInsets(top:0, left: 0, bottom: 60, right: 0)
     }
     
     func layoutCells(layout: UICollectionViewFlowLayout) {

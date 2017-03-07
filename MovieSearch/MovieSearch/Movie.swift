@@ -32,13 +32,19 @@ class RealmString : Object {
     dynamic var stringValue = ""
 }
 
+class RealmImage: Object {
+    dynamic var imageData = Data()
+}
+
 class Movie: Object {
+    
     dynamic var title: String = ""
     dynamic var releaseDate: String = ""
     dynamic var imdbID: String = ""
     dynamic var posterImageURL = ""
     dynamic var favorite: Bool = false
     var cast = List<RealmString>()
+    dynamic var image = RealmImage().imageData
     
     required init() {
         super.init()

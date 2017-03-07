@@ -8,6 +8,7 @@
 
 import UIKit
 
+@IBDesignable
 class SearchButton: UIButton {
     
     @IBInspectable var roundedButton: Bool {
@@ -15,6 +16,29 @@ class SearchButton: UIButton {
             layer.cornerRadius = 4
             backgroundColor = .blue
             setTitleColor(.white, for: .normal)
+        }
+    }
+    
+    @IBInspectable var cornerRadius: CGFloat {
+        get {
+            return layer.cornerRadius
+        }
+        
+        set {
+            layer.cornerRadius = newValue
+            layer.masksToBounds = newValue > 0
+        }
+    }
+    
+    @IBInspectable var borderWidth: CGFloat = 0 {
+        didSet {
+            layer.borderWidth = borderWidth
+        }
+    }
+    
+    @IBInspectable var borderColor: UIColor? {
+        didSet {
+            layer.borderColor = borderColor?.cgColor
         }
     }
     
