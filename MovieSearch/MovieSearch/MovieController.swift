@@ -102,30 +102,13 @@ extension MovieViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MovieCell
         cell.layoutSubviews()
-        if cell.image == nil {
-            cell.activityIndicator.startAnimating()
-        }
-        if searchBarActive == false {
-            DispatchQueue.main.async { [weak self] in
-                self?.setupCell(indexPath: indexPath, cell: cell)
-            }
-        }
-        if searchBarActive == true {
-            setupFilteredCell(indexPath: indexPath, cell: cell)
-        }
-        if cell.image != nil {
-            DispatchQueue.main.async {
-                cell.activityIndicator.isHidden = true
-                cell.activityIndicator.stopAnimating()
-            }
-        }
+        cell.image == nil ? cell.activityIndicator.startAnimating() : cell.activityIndicator.stopAnimating()
+        searchBarActive == false ? self.setupCell(indexPath: indexPath, cell: cell) : setupFilteredCell(indexPath: indexPath, cell: cell)
         return cell
     }
 }
 
 extension MovieViewController {
-    
-    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return datasource.sizeForItemAt
@@ -172,7 +155,6 @@ extension MovieViewController: UISearchControllerDelegate {
         searchBar.text = ""
     }
     
-    
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         cancelSearching(searchBar: searchBar)
         DispatchQueue.main.async {
@@ -184,7 +166,6 @@ extension MovieViewController: UISearchControllerDelegate {
         searchBarActive = true
         view.endEditing(true)
     }
-    
     
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
         searchBarActive = false
