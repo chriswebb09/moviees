@@ -142,7 +142,9 @@ extension MovieViewController: UISearchControllerDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchBarActive = true
+        
         if let barText = searchBar.text {
+            navigationController?.navigationBar.topItem?.title = "Filtered: \(barText)"
             if !barText.isEmpty {
                 DispatchQueue.main.async {
                     self.filterContentForSearchText(searchText: barText)
