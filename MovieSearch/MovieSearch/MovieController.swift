@@ -108,7 +108,6 @@ extension MovieViewController {
             }
             return cell
         } else {
-            
             if (dataSourceForSearchResults?.count)! >= indexPath.row && indexPath.row > 0 {
                 if let movie = dataSourceForSearchResults?[indexPath.row] {
                     DispatchQueue.main.async {
@@ -116,7 +115,6 @@ extension MovieViewController {
                     }
                 }
             }
-            
             if cell.image != nil {
                 DispatchQueue.main.async {
                     cell.activityIndicator.isHidden = true
@@ -178,7 +176,6 @@ extension MovieViewController {
         DispatchQueue.main.async {
             self.collectionView?.reloadData()
         }
-        
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
@@ -208,8 +205,6 @@ extension MovieViewController {
             cell.isSelected = true
             cell.selectedStyle()
         }
-        
-        
         return true
     }
     
