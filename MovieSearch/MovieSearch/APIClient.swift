@@ -19,7 +19,7 @@ final class APIClient {
     
     var pageNumber = 1
     
-    let session = URLSession(configuration: URLSessionConfiguration.default)
+    let session = URLSession(configuration: URLSessionConfiguration.ephemeral)
     let realm = try! Realm()
     var movies: Results<Movie>!
     
@@ -60,12 +60,33 @@ extension APIClient {
         let url = URL(string: urlString)!
         var allMovies: [Movie]!
         
+        guard urlString.characters.count > 34 else {
+            if let realm = try? Realm() {
+                self.movies = realm.objects(Movie.self)
+                allMovies = [Movie]() 
+                self.movies.forEach { movie in
+                    allMovies.append(movie)
+                }
+                
+            }
+            completion(allMovies, 1)
+            return
+        }
+        
         getDataFromUrl(url: url) { data, response, error in
             guard let data = data else { return }
             do {
-                let result = try? JSONSerialization.jsonObject(with: data, options:[]) as! [String:AnyObject]
+                let result = try? JSONSerialization.jsonObject(with: data, options:[]) as! [String: AnyObject]
+                
+                if let responseString = result?["Response"] as? String {
+                    if responseString == "False" {
+                        return
+                    }
+                }
+                
                 let dataResponse = result?["Search"] as AnyObject
-                let searchData = dataResponse as! [[String: String]]
+                
+                let searchData = dataResponse as! [[String : String]]
                 allMovies = parse.parseData(data: searchData)
                 
                 allMovies.forEach { movie in

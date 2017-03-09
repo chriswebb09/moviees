@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="zZd-D6-eXP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="cJr-Jx-RxR">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -19,73 +19,90 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="SearchView" customModule="MovieSearch" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a2h-u6-xDq" customClass="SearchField" customModule="MovieSearch" customModuleProvider="target">
-                                <rect key="frame" x="52" y="308" width="270" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3q4-5R-jEu" customClass="SearchButton" customModule="MovieSearch" customModuleProvider="target">
+                                <rect key="frame" x="97" y="432" width="181" height="60"/>
+                                <state key="normal" title="Button"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="roundedButton" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="26"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="background">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                        <color key="value" red="0.078320084789999994" green="0.79557306660000005" blue="0.95052744290000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                        <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isHorizontal" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isGradientType" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="search:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Oro-hJ-N2u"/>
+                                    <segue destination="STT-oz-A3D" kind="show" id="uFJ-Va-mYq"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search for Movie" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nz0-Zn-pFR">
+                                <rect key="frame" x="81" y="152" width="213" height="49"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="fQw-qY-xvT"/>
+                                    <constraint firstAttribute="height" constant="49" id="lXT-OJ-887"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="22"/>
+                                <color key="textColor" red="1" green="0.98639609070000001" blue="0.99564136260000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="a2h-u6-xDq" customClass="SearchField" customModule="MovieSearch" customModuleProvider="target">
+                                <rect key="frame" x="25" y="279" width="326" height="60"/>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholderString" value="Search for movie..."/>
                                     <userDefinedRuntimeAttribute type="color" keyPath="border">
-                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="1" green="0.98639609070000001" blue="0.99564136260000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="width">
                                         <real key="value" value="2"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="radius">
-                                        <real key="value" value="5"/>
+                                        <real key="value" value="26"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundTint">
+                                        <color key="value" red="0.058823529411764705" green="0.1074671871357161" blue="0.29860009517766495" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="textTint">
+                                        <color key="value" red="1" green="0.98639609070000001" blue="0.99564136260000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
+                                        <color key="value" red="1" green="0.98639609070000001" blue="0.99564136260000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search for Movie" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nz0-Zn-pFR">
-                                <rect key="frame" x="81" y="152" width="213" height="73"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3q4-5R-jEu" customClass="SearchButton" customModule="MovieSearch" customModuleProvider="target">
-                                <rect key="frame" x="127" y="470" width="120" height="52"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="fcK-sD-azI"/>
-                                    <constraint firstAttribute="height" constant="52" id="onY-ih-s6r"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="roundedButton" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="2"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="search:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Oro-hJ-N2u"/>
-                                    <segue destination="STT-oz-A3D" kind="show" identifier="movieSearch" id="dFz-jp-4Cv"/>
-                                </connections>
-                            </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.058823529411764705" green="0.1074671871357161" blue="0.29860009517766495" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="nz0-Zn-pFR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="65" id="4tS-hL-O4h"/>
-                            <constraint firstItem="a2h-u6-xDq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4vl-5z-dbA"/>
-                            <constraint firstItem="nz0-Zn-pFR" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="88" id="50f-TM-VUq"/>
-                            <constraint firstItem="a2h-u6-xDq" firstAttribute="top" secondItem="nz0-Zn-pFR" secondAttribute="bottom" constant="83" id="Ioj-iN-V1b"/>
-                            <constraint firstItem="nz0-Zn-pFR" firstAttribute="centerX" secondItem="a2h-u6-xDq" secondAttribute="centerX" id="U5A-k7-TN8"/>
-                            <constraint firstItem="a2h-u6-xDq" firstAttribute="centerX" secondItem="3q4-5R-jEu" secondAttribute="centerX" id="izg-Sc-5LZ"/>
-                            <constraint firstItem="a2h-u6-xDq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="36" id="kmg-eQ-QZ3"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3q4-5R-jEu" secondAttribute="bottom" constant="96" id="nM1-XV-M2H"/>
-                            <constraint firstItem="a2h-u6-xDq" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="oRX-Qq-e1d"/>
+                            <constraint firstItem="nz0-Zn-pFR" firstAttribute="centerX" secondItem="a2h-u6-xDq" secondAttribute="centerX" id="1F0-aG-00O"/>
+                            <constraint firstItem="3q4-5R-jEu" firstAttribute="top" secondItem="a2h-u6-xDq" secondAttribute="bottom" constant="93" id="1La-FP-b3P"/>
+                            <constraint firstItem="a2h-u6-xDq" firstAttribute="top" secondItem="nz0-Zn-pFR" secondAttribute="bottom" constant="78" id="CKu-qN-QGp"/>
+                            <constraint firstItem="nz0-Zn-pFR" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="88" id="Id5-Hd-PSL"/>
+                            <constraint firstItem="a2h-u6-xDq" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="JVw-QA-tsB"/>
+                            <constraint firstItem="3q4-5R-jEu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="81" id="OoT-48-tPX"/>
+                            <constraint firstItem="a2h-u6-xDq" firstAttribute="centerX" secondItem="3q4-5R-jEu" secondAttribute="centerX" id="ZrO-so-cCw"/>
+                            <constraint firstItem="a2h-u6-xDq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="9" id="cav-kp-V9c"/>
+                            <constraint firstItem="nz0-Zn-pFR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pd4-FA-Y7t"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3q4-5R-jEu" secondAttribute="bottom" constant="126" id="xkd-Qe-vqj"/>
+                            <constraint firstItem="nz0-Zn-pFR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="65" id="y5w-y0-wXR"/>
                         </constraints>
                         <connections>
                             <outlet property="searchButton" destination="3q4-5R-jEu" id="NYy-Hr-54u"/>
@@ -99,14 +116,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1087.2" y="37.331334332833585"/>
+            <point key="canvasLocation" x="1509.5999999999999" y="-788.45577211394311"/>
         </scene>
         <!--Movie View Controller-->
         <scene sceneID="MRW-Vi-HKP">
             <objects>
                 <collectionViewController storyboardIdentifier="movieVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="STT-oz-A3D" customClass="MovieViewController" customModule="MovieSearch" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="xwL-FB-yQ8">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ijz-0S-nzq">
@@ -151,6 +168,17 @@
                                     <constraint firstItem="Ge8-Hd-lKY" firstAttribute="centerX" secondItem="xlI-Ka-m9d" secondAttribute="centerX" id="dXx-9y-D9n"/>
                                     <constraint firstAttribute="trailing" secondItem="Ge8-Hd-lKY" secondAttribute="trailing" id="f1H-XF-SOa"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="1" green="0.98639609066207556" blue="0.99564136255447655" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="activityIndicator" destination="xlI-Ka-m9d" id="Zej-C6-BJ0"/>
                                     <outlet property="posterView" destination="e1E-Bk-ZUx" id="jVO-7a-mUF"/>
@@ -189,10 +217,12 @@
                             <outlet property="delegate" destination="STT-oz-A3D" id="Z3x-Hf-veb"/>
                         </connections>
                     </collectionView>
+                    <tabBarItem key="tabBarItem" selectedImage="circleStarIcon copy" id="Fvp-lt-agI"/>
+                    <navigationItem key="navigationItem" id="sgr-Bd-Z32"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BQS-WV-A3K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1911.2" y="38.23088455772114"/>
+            <point key="canvasLocation" x="238" y="340"/>
         </scene>
         <!--Item-->
         <scene sceneID="YT5-b5-4lr">
@@ -222,27 +252,157 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="30a-ZX-wan" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="148" y="37.331334332833585"/>
+            <point key="canvasLocation" x="-478" y="-788"/>
+        </scene>
+        <!--Movie View Controller-->
+        <scene sceneID="ZFC-M5-WZF">
+            <objects>
+                <collectionViewController storyboardIdentifier="TabbarVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FbO-FW-Bag" customClass="MovieViewController" customModule="MovieSearch" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Nfh-ul-EDN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Mfa-lw-RwC">
+                            <size key="itemSize" width="131" height="181"/>
+                            <size key="headerReferenceSize" width="50" height="50"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="movieCell" id="STb-0g-7Yq" customClass="MovieCell" customModule="MovieSearch" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="50" width="131" height="181"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="131" height="181"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9eN-w8-e31">
+                                            <rect key="frame" x="0.0" y="0.0" width="131" height="151"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NuE-1q-DvI">
+                                            <rect key="frame" x="0.0" y="150" width="131" height="31"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="31" id="3nb-nw-Bfe"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <activityIndicatorView hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="0et-lY-Nla">
+                                            <rect key="frame" x="55" y="80" width="20" height="20"/>
+                                        </activityIndicatorView>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="NuE-1q-DvI" secondAttribute="bottom" id="Dl2-7c-4SC"/>
+                                    <constraint firstItem="9eN-w8-e31" firstAttribute="top" secondItem="STb-0g-7Yq" secondAttribute="top" id="MWp-PP-lM0"/>
+                                    <constraint firstItem="NuE-1q-DvI" firstAttribute="trailing" secondItem="9eN-w8-e31" secondAttribute="trailing" id="PLc-37-nun"/>
+                                    <constraint firstAttribute="trailing" secondItem="NuE-1q-DvI" secondAttribute="trailing" id="eVI-Hb-bJe"/>
+                                    <constraint firstItem="NuE-1q-DvI" firstAttribute="leading" secondItem="STb-0g-7Yq" secondAttribute="leading" id="gc4-eY-Oij"/>
+                                    <constraint firstItem="NuE-1q-DvI" firstAttribute="leading" secondItem="9eN-w8-e31" secondAttribute="leading" id="obK-zn-Q14"/>
+                                    <constraint firstItem="NuE-1q-DvI" firstAttribute="centerX" secondItem="0et-lY-Nla" secondAttribute="centerX" id="pvO-z2-1SH"/>
+                                    <constraint firstItem="NuE-1q-DvI" firstAttribute="top" secondItem="0et-lY-Nla" secondAttribute="bottom" constant="50" id="rWt-T8-LrK"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="9eN-w8-e31" secondAttribute="bottom" constant="22" id="tZv-No-2MK"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="1" green="0.98639609070000001" blue="0.99564136260000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="activityIndicator" destination="0et-lY-Nla" id="sYD-3G-hSm"/>
+                                    <outlet property="posterView" destination="9eN-w8-e31" id="reo-6t-pUD"/>
+                                    <outlet property="titleLabel" destination="NuE-1q-DvI" id="Yc6-8l-7rs"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionViewHeader" id="rir-0E-Xbo" customClass="HeaderReusableView" customModule="MovieSearch" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <searchBar clipsSubviews="YES" contentMode="redraw" preservesSuperviewLayoutMargins="YES" barStyle="black" searchBarStyle="prominent" placeholder="Seach for movie..." translatesAutoresizingMaskIntoConstraints="NO" id="TK4-f1-eUn">
+                                    <rect key="frame" x="0.0" y="-309" width="375" height="667"/>
+                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="667" id="Ocd-Hg-ItQ"/>
+                                    </constraints>
+                                    <edgeInsets key="layoutMargins" top="-150" left="8" bottom="8" right="8"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="FbO-FW-Bag" id="Mj6-uO-Jnp"/>
+                                    </connections>
+                                </searchBar>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="TK4-f1-eUn" firstAttribute="centerY" secondItem="rir-0E-Xbo" secondAttribute="centerY" id="8wP-dz-Uvb"/>
+                                <constraint firstItem="TK4-f1-eUn" firstAttribute="leading" secondItem="rir-0E-Xbo" secondAttribute="leading" id="ktX-4H-CKe"/>
+                                <constraint firstAttribute="trailing" secondItem="TK4-f1-eUn" secondAttribute="trailing" id="ujJ-h8-xCJ"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="searchBar" destination="TK4-f1-eUn" id="8b9-3E-NMl"/>
+                            </connections>
+                        </collectionReusableView>
+                        <connections>
+                            <outlet property="dataSource" destination="FbO-FW-Bag" id="wgH-YP-kwQ"/>
+                            <outlet property="delegate" destination="FbO-FW-Bag" id="bp9-72-uJS"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="83i-5d-SZE"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zl5-Uj-5tR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1870" y="1418"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="p2l-sb-rJk">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fyF-yn-7fm" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="rqa-KI-m7u"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="TOQ-JV-gMk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="FbO-FW-Bag" kind="relationship" relationship="rootViewController" id="yyr-z0-ewi"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3w4-O9-37j" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1431" y="1419"/>
         </scene>
         <!--Tab Bar Controller-->
-        <scene sceneID="Ev3-ve-rVy">
+        <scene sceneID="3Gg-5b-cdd">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="zZd-D6-eXP" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="cJr-Jx-RxR" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="nX0-bH-IFh">
+                    <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" itemPositioning="centered" id="lIB-bF-Y5L">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="barTintColor" red="0.42161722715736039" green="0.42161722715736039" blue="0.42161722715736039" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="M85-c3-rWF" kind="relationship" relationship="viewControllers" id="BjC-dq-o2I"/>
+                        <segue destination="fyF-yn-7fm" kind="relationship" relationship="viewControllers" id="ORm-Dg-ADy"/>
+                        <segue destination="M85-c3-rWF" kind="relationship" relationship="viewControllers" id="HK5-hH-tCR"/>
+                        <segue destination="STT-oz-A3D" kind="relationship" relationship="viewControllers" id="3Q3-VV-fQh"/>
                     </connections>
                 </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Xg3-fc-DYT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NDx-nD-QW7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-791.20000000000005" y="37.331334332833585"/>
+            <point key="canvasLocation" x="-2153" y="276"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="circleStarIcon copy" width="86" height="86"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="uFJ-Va-mYq"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -44,18 +44,13 @@ class MovieViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView?.delegate = self
-        collectionView?.dataSource = self
-        definesPresentationContext = true
         setupUI()
     }
     
     func setupUI() {
         if let collectView = collectionView {
-            edgesForExtendedLayout = []
             collectView.collectionViewLayout = layout
             datasource.layoutCells(layout: layout)
-            collectView.backgroundColor = .lightGray
         }
     }
 }
@@ -77,31 +72,11 @@ extension MovieViewController {
         return datasource.count
     }
     
-    func setupCell(indexPath: IndexPath, cell: MovieCell) {
-        if let movieList = movies {
-            if movieList.count >= indexPath.row && indexPath.row > 0 {
-                DispatchQueue.main.async {
-                    cell.setupCell(movie: movieList[indexPath.row])
-                }
-            }
-        }
-    }
-    
-    func setupFilteredCell(indexPath: IndexPath, cell: MovieCell) {
-        if let filteredMovies = dataSourceForSearchResults {
-            if filteredMovies.count >= indexPath.row && indexPath.row >= 0 {
-                DispatchQueue.main.async {
-                    cell.setupCell(movie: filteredMovies[indexPath.row])
-                }
-            }
-        }
-    }
-    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MovieCell
         cell.layoutSubviews()
         cell.image == nil ? cell.activityIndicator.startAnimating() : cell.activityIndicator.stopAnimating()
-        searchBarActive == false ? self.setupCell(indexPath: indexPath, cell: cell) : setupFilteredCell(indexPath: indexPath, cell: cell)
+        searchBarActive == false ? datasource.setupCell(indexPath: indexPath, cell: cell) : datasource.setupFilteredCell(indexPath: indexPath, cell: cell)
         return cell
     }
 }
@@ -181,7 +156,10 @@ extension MovieViewController: UISearchResultsUpdating {
     
     func filterContentForSearchText(searchText: String) {
         DispatchQueue.main.async { [weak self] in
-            self?.dataSourceForSearchResults = Filter.filteredBy(filterFrom: (self?.datasource.movies)!, term: searchText)
+            if let movies = self?.datasource.movies {
+                self?.dataSourceForSearchResults = Filter.filteredBy(filterFrom: movies, term: searchText)
+            }
+            
         }
     }
     
@@ -213,20 +191,24 @@ extension MovieViewController {
 }
 
 extension MovieViewController: UISearchBarDelegate {
+    
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionElementKindSectionHeader:
-            let reusableview = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier:  "CollectionViewHeader", for: indexPath) as! HeaderReusableView
-            reusableview.frame = CGRect(x:0 , y:0, width: self.view.frame.width, height:50)
-            reusableview.searchBar = searchController.searchBar
-            searchController.searchResultsUpdater = self
-            searchController.dimsBackgroundDuringPresentation = false
-            definesPresentationContext = true
-            reusableview.searchBar.delegate = self
-            return reusableview
-            
+            return setupResuableView(indexPath: indexPath)
         default:
             fatalError("Unexpected element kind")
         }
+    }
+    
+    func setupResuableView(indexPath: IndexPath) -> HeaderReusableView {
+        let reusableview = collectionView?.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier:  "CollectionViewHeader", for: indexPath) as! HeaderReusableView
+        reusableview.frame = CGRect(x:0 , y:0, width: self.view.frame.width, height:50)
+        reusableview.searchBar = searchController.searchBar
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        reusableview.searchBar.delegate = self
+        return reusableview
     }
 }

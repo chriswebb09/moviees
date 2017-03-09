@@ -11,10 +11,40 @@ import UIKit
 @IBDesignable
 class SearchButton: UIButton {
     
+    @IBInspectable var startColor: UIColor = UIColor.white {
+        didSet{
+            setupView()
+        }
+    }
+    
+    @IBInspectable var endColor: UIColor = UIColor.black {
+        didSet{
+            setupView()
+        }
+    }
+    
+    @IBInspectable var isHorizontal: Bool = false {
+        didSet{
+            setupView()
+        }
+    }
+    
+    
+    @IBInspectable var isGradientType: Bool = true {
+        didSet {
+            layer.addSublayer(gradientLayer)
+            //layer.insertSublayer(gradientLayer, above: layer)
+//            if isGradientType == true {
+//                layer.insertSublayer(gradientLayer, above: layer)
+//            }
+        }
+    }
+    
+    
     @IBInspectable var roundedButton: Bool {
         didSet {
-            layer.cornerRadius = 4
-            backgroundColor = .blue
+            // layer.cornerRadius = 4
+           // backgroundColor = .blue
             setTitleColor(.white, for: .normal)
         }
     }
@@ -35,7 +65,13 @@ class SearchButton: UIButton {
         }
     }
     
-    @IBInspectable var borderColor: UIColor? {
+    @IBInspectable var background: UIColor = UIColor() {
+        didSet {
+            //backgroundColor = background
+        }
+    }
+    
+    @IBInspectable var borderColor: UIColor? = UIColor() {
         didSet {
             layer.borderColor = borderColor?.cgColor
         }
@@ -43,6 +79,7 @@ class SearchButton: UIButton {
     
     override init(frame: CGRect) {
         roundedButton = true
+        
         super.init(frame: frame)
     }
     
@@ -53,5 +90,24 @@ class SearchButton: UIButton {
         } else {
             super.init()
         }
+    }
+    
+    
+    private func setupView(){
+        
+        let colors:Array = [startColor.cgColor, endColor.cgColor]
+        gradientLayer.colors = colors
+        if isHorizontal {
+            gradientLayer.endPoint = CGPoint(x: 1, y: 0)
+        } else {
+            gradientLayer.endPoint = CGPoint(x: 0, y: 1)
+        }
+        
+        self.setNeedsDisplay()
+        layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
+    @IBInspectable var gradientLayer: CAGradientLayer {
+        return CAGradientLayer(layer: layer)
     }
 }

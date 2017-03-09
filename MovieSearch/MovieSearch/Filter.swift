@@ -13,7 +13,7 @@ struct Filter {
     static func filteredBy(filterFrom: [Movie], term: String) -> [Movie] {
         let predicate = NSPredicate(format: "SELF BEGINSWITH %@", term)
         let searchDataSource = filterFrom.filter { predicate.evaluate(with: $0.title) }
-        var sortedData = searchDataSource.sorted { $0.0.title.localizedCaseInsensitiveCompare($0.1.title) == ComparisonResult.orderedAscending }
+        let sortedData = searchDataSource.sorted { $0.0.title.localizedCaseInsensitiveCompare($0.1.title) == ComparisonResult.orderedAscending }
         return sortedData
     }
 }

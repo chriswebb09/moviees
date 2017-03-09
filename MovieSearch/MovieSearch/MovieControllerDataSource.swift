@@ -11,13 +11,17 @@ import Realm
 import RealmSwift
 
 class MovieControllerDataSource {
+    
     private let realm = try! Realm()
     
-    var movies = [Movie]() 
+    var movies = [Movie]()
     
     var count: Int {
         return movies.count
     }
+    
+    var dataSourceForSearchResults: [Movie]?
+
     
     var numberOfSections: Int {
         return 1
@@ -42,13 +46,26 @@ class MovieControllerDataSource {
         layout.itemSize = CGSize(width: (UIScreen.main.bounds.size.width - 40)/2, height: ((UIScreen.main.bounds.size.width - 40)/1.8))
     }
     
-    func setMovieResults() -> [String] {
-        return ["new result"]
-    }
-    
-    
     func getAll() -> [Movie] {
         return realm.objects(Movie.self).map { $0 }
+    }
+    
+    func setupCell(indexPath: IndexPath, cell: MovieCell) {
+        if movies.count >= indexPath.row && indexPath.row > 0 {
+            DispatchQueue.main.async {
+                cell.setupCell(movie: self.movies[indexPath.row])
+            }
+        }
+    }
+    
+    func setupFilteredCell(indexPath: IndexPath, cell: MovieCell) {
+        if let filteredMovies = dataSourceForSearchResults {
+            if filteredMovies.count >= indexPath.row && indexPath.row >= 0 {
+                DispatchQueue.main.async {
+                    cell.setupCell(movie: filteredMovies[indexPath.row])
+                }
+            }
+        }
     }
     
 }

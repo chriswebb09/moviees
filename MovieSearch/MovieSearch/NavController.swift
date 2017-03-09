@@ -38,8 +38,5 @@ class NavController: UINavigationController {
     required init?(coder aDecoder: NSCoder) {
         self.attributedText = [NSFontAttributeName: "Helvetica"]
         super.init(coder: aDecoder)
-        
-        print("unable")
-        
     }
 }

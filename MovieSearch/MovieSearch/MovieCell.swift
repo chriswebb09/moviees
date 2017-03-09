@@ -8,6 +8,9 @@
 
 import UIKit
 
+
+
+@IBDesignable
 class MovieCell: UICollectionViewCell {
     
     @IBOutlet weak var posterView: UIImageView! {
@@ -38,6 +41,24 @@ class MovieCell: UICollectionViewCell {
         }
     }
     
+    @IBInspectable var borderColor: UIColor = UIColor() {
+        didSet {
+            layer.borderColor = borderColor.cgColor
+        }
+    }
+    
+    @IBInspectable var borderWidth: CGFloat = 0 {
+        didSet {
+            layer.borderWidth = borderWidth
+        }
+    }
+    
+    @IBInspectable var cornerRadius: CGFloat = 0 {
+        didSet {
+            layer.cornerRadius = cornerRadius
+        }
+    }
+    
     override var isSelected: Bool {
         didSet {
             selectedStyle()
@@ -60,8 +81,8 @@ class MovieCell: UICollectionViewCell {
     @discardableResult
     func selectedStyle() -> Bool {
         backgroundColor = isSelected == true ? .orange : .darkGray
-        layer.borderWidth = isSelected == true ? 2.0 : 1.0
-        layer.borderColor = UIColor.black.cgColor
+        //layer.borderWidth = isSelected == true ? 2.0 : 1.0
+      //  layer.borderColor = UIColor.black.cgColor
         posterView.isHidden = isSelected
         return !isSelected
     }
