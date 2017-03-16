@@ -11,11 +11,20 @@ import UIKit
 extension UICollectionViewController {
     
     override open func viewDidLoad() {
-        self.edgesForExtendedLayout = []
-        self.collectionView?.delegate = self
-        self.collectionView?.dataSource = self
-        self.definesPresentationContext = true
-        self.collectionView?.backgroundColor = .lightGray
+        edgesForExtendedLayout = []
+        collectionView?.delegate = self
+        collectionView?.dataSource = self
+        definesPresentationContext = true
+        collectionView?.backgroundColor = .lightGray
         super.viewDidLoad()
+    }
+}
+
+extension UICollectionViewController {
+    
+    func returnHeaderView(_ indexPath: IndexPath) -> HeaderReusableView {
+        let reusableview = collectionView?.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier:  "CollectionViewHeader", for: indexPath) as! HeaderReusableView
+        reusableview.frame = CGRect(x:0 , y:0, width: self.view.frame.width, height:50)
+        return reusableview
     }
 }

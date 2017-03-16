@@ -23,7 +23,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3q4-5R-jEu" customClass="SearchButton" customModule="MovieSearch" customModuleProvider="target">
-                                <rect key="frame" x="97" y="432" width="181" height="60"/>
+                                <rect key="frame" x="97" y="442" width="181" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Dnk-48-Nbw"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="roundedButton" value="NO"/>
@@ -55,15 +58,16 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search for Movie" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nz0-Zn-pFR">
                                 <rect key="frame" x="81" y="152" width="213" height="49"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="49" id="lXT-OJ-887"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="22"/>
                                 <color key="textColor" red="1" green="0.98639609070000001" blue="0.99564136260000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="a2h-u6-xDq" customClass="SearchField" customModule="MovieSearch" customModuleProvider="target">
-                                <rect key="frame" x="25" y="279" width="326" height="60"/>
+                                <rect key="frame" x="27" y="279.5" width="321" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="CkH-wf-2Ly"/>
+                                    <constraint firstAttribute="height" constant="60" id="DBs-hv-BYO"/>
+                                </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -92,17 +96,16 @@
                         </subviews>
                         <color key="backgroundColor" red="0.058823529411764705" green="0.1074671871357161" blue="0.29860009517766495" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="nz0-Zn-pFR" firstAttribute="centerX" secondItem="a2h-u6-xDq" secondAttribute="centerX" id="1F0-aG-00O"/>
-                            <constraint firstItem="3q4-5R-jEu" firstAttribute="top" secondItem="a2h-u6-xDq" secondAttribute="bottom" constant="93" id="1La-FP-b3P"/>
-                            <constraint firstItem="a2h-u6-xDq" firstAttribute="top" secondItem="nz0-Zn-pFR" secondAttribute="bottom" constant="78" id="CKu-qN-QGp"/>
-                            <constraint firstItem="nz0-Zn-pFR" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="88" id="Id5-Hd-PSL"/>
-                            <constraint firstItem="a2h-u6-xDq" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="JVw-QA-tsB"/>
-                            <constraint firstItem="3q4-5R-jEu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="81" id="OoT-48-tPX"/>
-                            <constraint firstItem="a2h-u6-xDq" firstAttribute="centerX" secondItem="3q4-5R-jEu" secondAttribute="centerX" id="ZrO-so-cCw"/>
-                            <constraint firstItem="a2h-u6-xDq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="9" id="cav-kp-V9c"/>
-                            <constraint firstItem="nz0-Zn-pFR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pd4-FA-Y7t"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3q4-5R-jEu" secondAttribute="bottom" constant="126" id="xkd-Qe-vqj"/>
-                            <constraint firstItem="nz0-Zn-pFR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="65" id="y5w-y0-wXR"/>
+                            <constraint firstItem="3q4-5R-jEu" firstAttribute="centerX" secondItem="a2h-u6-xDq" secondAttribute="centerX" id="1pr-wr-hUi"/>
+                            <constraint firstItem="nz0-Zn-pFR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="65" id="2zk-5P-ZRu"/>
+                            <constraint firstItem="a2h-u6-xDq" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="7tM-g9-Eao"/>
+                            <constraint firstItem="3q4-5R-jEu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="81" id="8c6-eh-eQB"/>
+                            <constraint firstItem="nz0-Zn-pFR" firstAttribute="centerX" secondItem="a2h-u6-xDq" secondAttribute="centerX" id="ILc-Wg-DOX"/>
+                            <constraint firstItem="a2h-u6-xDq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Lec-pz-ynw"/>
+                            <constraint firstItem="a2h-u6-xDq" firstAttribute="top" secondItem="nz0-Zn-pFR" secondAttribute="bottom" constant="78" id="MMk-vW-RRP"/>
+                            <constraint firstItem="a2h-u6-xDq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="11" id="Z9O-VM-Ns5"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3q4-5R-jEu" secondAttribute="bottom" constant="126" id="gFf-M1-ZFJ"/>
+                            <constraint firstItem="nz0-Zn-pFR" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="88" id="rC1-0H-lrc"/>
                         </constraints>
                         <connections>
                             <outlet property="searchButton" destination="3q4-5R-jEu" id="NYy-Hr-54u"/>

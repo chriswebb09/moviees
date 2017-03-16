@@ -55,15 +55,15 @@ final class APIClient {
 
 extension APIClient {
     
-    public func sendAPICall(from urlString: String, completion: @escaping ([Movie], Int) -> Void) {
+    public func sendAPICall(from searchURL: URL, completion: @escaping ([Movie], Int) -> Void) {
         let parse = DataParser()
-        let url = URL(string: urlString)!
+        let url = searchURL
         var allMovies: [Movie]!
         
-        guard urlString.characters.count > 34 else {
+        guard searchURL.absoluteString.characters.count > 34 else {
             if let realm = try? Realm() {
                 self.movies = realm.objects(Movie.self)
-                allMovies = [Movie]() 
+                allMovies = [Movie]()
                 self.movies.forEach { movie in
                     allMovies.append(movie)
                 }
@@ -93,18 +93,18 @@ extension APIClient {
                     self.downloadImage(url: URL(string: movie.posterImageURL)!) { data in
                         DispatchQueue.main.async {
                             movie.image = data
-                        
-                        
-                        if let realm = try? Realm() {
-                            self.movies = realm.objects(Movie.self)
-                            if !(self.movies.contains(movie)) {
-                                try! realm.write {
-                                    realm.add(movie, update: true)
-                                    realm.refresh()
+                            
+                            
+                            if let realm = try? Realm() {
+                                self.movies = realm.objects(Movie.self)
+                                if !(self.movies.contains(movie)) {
+                                    try! realm.write {
+                                        realm.add(movie, update: true)
+                                        realm.refresh()
+                                    }
+                                    
+                                    allMovies.append(movie)
                                 }
-                                
-                                allMovies.append(movie)
-                            }
                             }
                         }
                     }

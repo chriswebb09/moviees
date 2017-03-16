@@ -33,4 +33,4 @@ class DataParser {
         return allMovies
     }
 }
- 
+

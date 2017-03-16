@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 @IBDesignable
 class MovieCell: UICollectionViewCell {
     
@@ -19,16 +17,10 @@ class MovieCell: UICollectionViewCell {
         }
     }
     
-    var image: UIImage! {
-        willSet {
-            print("IMAGE")
-        }
-    }
-    
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView! {
         didSet {
-            self.activityIndicator.hidesWhenStopped = true
-            self.activityIndicator.color = .white
+            activityIndicator.hidesWhenStopped = true
+            activityIndicator.color = .white
         }
     }
     
@@ -70,19 +62,17 @@ class MovieCell: UICollectionViewCell {
     }
     
     func setupCell(movie: Movie) {
+        self.layoutSubviews()
         titleLabel.text = movie.title
         DispatchQueue.main.async {
-            self.image = UIImage(data: movie.image)
-            self.posterView.image = self.image
+            self.posterView.image = UIImage(data: movie.image)
         }
-        
+        layoutIfNeeded()
     }
     
     @discardableResult
     func selectedStyle() -> Bool {
         backgroundColor = isSelected == true ? .orange : .darkGray
-        //layer.borderWidth = isSelected == true ? 2.0 : 1.0
-      //  layer.borderColor = UIColor.black.cgColor
         posterView.isHidden = isSelected
         return !isSelected
     }

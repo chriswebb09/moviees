@@ -14,13 +14,10 @@ class SearchViewController: UIViewController {
     let realm = try! Realm()
     var api = APIClient()
     var movies: [Movie] = [Movie]()
+    var viewModel: SearchViewModel = SearchViewModel(searchText: "", url: URL(string: "noe"))
     var backgroundQueue = DispatchQueue(label: "com.movies", qos: .background)
     
-    @IBOutlet var searchView: SearchView! {
-        didSet {
-            print("search view set")
-        }
-    }
+    @IBOutlet var searchView: SearchView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,30 +31,27 @@ class SearchViewController: UIViewController {
 extension SearchViewController {
     
     @IBAction func search(_ sender: Any) {
-
+        if let searchText = searchView.searchField.text {
+            viewModel.searchText = searchText
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationVC = segue.destination as! MovieViewController
-        destinationVC.title = "Search term: \(searchView.searchField.text!)"
-//        if let nav = destinationVC.navigationController, let item = nav.navigationBar.topItem {
-//            
-//            //nav.navigationBar
-//        }
-        destinationVC.navigationController?.navigationBar.topItem?.title = searchView.searchField.text
-        if let searchText = searchView.searchField, let searchString = searchText.text {
-            let encoded = searchString.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)
-            if let encodedString = encoded {
-                let testMovies = destinationVC.datasource.getAll()
-                api.sendAPICall(from: "http://www.omdbapi.com/?s=\(encodedString)&page=1") { movie in
-                    destinationVC.movies = movie.0
-                    destinationVC.movies?.append(contentsOf: testMovies)
-                    DispatchQueue.main.async {
-                        destinationVC.collectionView?.reloadData()
-                    }
-                    print("fetching data")
+        if let searchText = searchView.searchField.text {
+            viewModel.searchText = searchText
+            
+            let destinationVC = segue.destination as! MovieViewController
+            destinationVC.navigationController?.navigationBar.topItem?.title = viewModel.searchText
+            destinationVC.title = "Search term: \(viewModel.searchText)"
+            let testMovies = destinationVC.datasource.getAll()
+            api.sendAPICall(from: viewModel.encodeString(viewModel.searchText)!) { movie in
+                destinationVC.movies = movie.0
+                destinationVC.movies?.append(contentsOf: testMovies)
+                DispatchQueue.main.async {
+                    destinationVC.collectionView?.reloadData()
                 }
             }
         }
-     }
+    }
+    
 }

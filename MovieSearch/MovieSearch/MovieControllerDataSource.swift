@@ -32,7 +32,7 @@ class MovieControllerDataSource {
     }
     
     var sizeForItemAt: CGSize {
-        return CGSize(width: UIScreen.main.bounds.height, height: UIScreen.main.bounds.width/3.5)
+        return CGSize(width: UIScreen.main.bounds.height, height: UIScreen.main.bounds.width / 3.5)
     }
     
     var edgeInset: UIEdgeInsets {
@@ -43,14 +43,14 @@ class MovieControllerDataSource {
         layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         layout.minimumInteritemSpacing = 5.0
         layout.minimumLineSpacing = 5.0
-        layout.itemSize = CGSize(width: (UIScreen.main.bounds.size.width - 40)/2, height: ((UIScreen.main.bounds.size.width - 40)/1.8))
+        layout.itemSize = CGSize(width: (UIScreen.main.bounds.size.width - 40)/2, height: ((UIScreen.main.bounds.size.width - 40) / 1.8))
     }
     
     func getAll() -> [Movie] {
         return realm.objects(Movie.self).map { $0 }
     }
     
-    func setupCell(indexPath: IndexPath, cell: MovieCell) {
+    func setupCell(indexPath: IndexPath, cell: MovieCell, controller: MovieViewController) {
         if movies.count >= indexPath.row && indexPath.row > 0 {
             DispatchQueue.main.async {
                 cell.setupCell(movie: self.movies[indexPath.row])
@@ -58,7 +58,7 @@ class MovieControllerDataSource {
         }
     }
     
-    func setupFilteredCell(indexPath: IndexPath, cell: MovieCell) {
+    func setupFilteredCell(indexPath: IndexPath, cell: MovieCell, controller: MovieViewController) {
         if let filteredMovies = dataSourceForSearchResults {
             if filteredMovies.count >= indexPath.row && indexPath.row >= 0 {
                 DispatchQueue.main.async {

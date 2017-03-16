@@ -25,23 +25,22 @@ class SearchField: UITextField {
     
     @IBInspectable var width: CGFloat = 0 {
         didSet {
-            layer.borderWidth = width 
+            layer.borderWidth = width
         }
     }
-    
     
     @IBInspectable var backgroundTint: UIColor = UIColor() {
         didSet {
             backgroundColor = backgroundTint
         }
     }
-
+    
     @IBInspectable var placeHolderColor: UIColor? {
         get {
             return self.placeHolderColor
         }
         set {
-            self.attributedPlaceholder = NSAttributedString(string:self.placeholder != nil ? self.placeholder! : "", attributes:[NSForegroundColorAttributeName: newValue!])
+            self.attributedPlaceholder = NSAttributedString(string: self.placeholder != nil ? self.placeholder! : "", attributes: [NSForegroundColorAttributeName: newValue!])
         }
     }
     
@@ -56,7 +55,6 @@ class SearchField: UITextField {
             textColor = textTint
         }
     }
-    
     
     override func textRect(forBounds bounds: CGRect) -> CGRect {
         return CGRect(x: bounds.origin.x + 15,

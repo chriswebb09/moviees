@@ -8,6 +8,13 @@
 
 import Foundation
 
-class SearchViewModel {
+struct SearchViewModel {
+    var searchText: String
+    var url: URL?
+    
+    mutating func encodeString(_ string: String) -> URL? {
+        self.url = URL(string: "http://www.omdbapi.com/?s=\(string.urlEncodedString()!)&page=1")!
+        return self.url
+    }
     
 }

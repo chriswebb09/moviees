@@ -8,7 +8,7 @@
 
 import UIKit
 import RealmSwift
-import Realm 
+import Realm
 
 protocol UserProtocol {
     var username: String { get set }
@@ -47,7 +47,7 @@ class Movie: Object {
     dynamic var image = RealmImage().imageData
     
     var cast = List<RealmString>()
-
+    
     required init() {
         super.init()
     }
