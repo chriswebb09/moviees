@@ -16,5 +16,4 @@ struct SearchViewModel {
         self.url = URL(string: "http://www.omdbapi.com/?s=\(string.urlEncodedString()!)&page=1")!
         return self.url
     }
-    
 }

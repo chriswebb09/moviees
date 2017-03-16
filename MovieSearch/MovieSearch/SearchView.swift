@@ -11,8 +11,6 @@ import UIKit
 class SearchView: UIView {
     
     @IBOutlet weak var searchField: SearchField!
-    
-    
     @IBOutlet weak var searchButton: SearchButton! {
         didSet {
             searchButton.roundedButton = true

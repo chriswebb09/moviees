@@ -9,7 +9,6 @@
 import Foundation
 
 struct Filter {
-    
     static func filteredBy(filterFrom: [Movie], term: String) -> [Movie] {
         let predicate = NSPredicate(format: "SELF BEGINSWITH %@", term)
         let searchDataSource = filterFrom.filter { predicate.evaluate(with: $0.title) }

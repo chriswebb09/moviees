@@ -93,8 +93,6 @@ extension APIClient {
                     self.downloadImage(url: URL(string: movie.posterImageURL)!) { data in
                         DispatchQueue.main.async {
                             movie.image = data
-                            
-                            
                             if let realm = try? Realm() {
                                 self.movies = realm.objects(Movie.self)
                                 if !(self.movies.contains(movie)) {
@@ -102,7 +100,6 @@ extension APIClient {
                                         realm.add(movie, update: true)
                                         realm.refresh()
                                     }
-                                    
                                     allMovies.append(movie)
                                 }
                             }

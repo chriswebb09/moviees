@@ -9,9 +9,7 @@
 import UIKit
 
 struct Cache {
-    
     let imageCache = NSCache<NSString, UIImage>()
-    
     
     func getCacheImage(urlString: String) -> UIImage? {
         if let cachedImage = imageCache.object(forKey: urlString as NSString) {
@@ -19,6 +17,5 @@ struct Cache {
         }
         return nil
     }
-    
 }
 

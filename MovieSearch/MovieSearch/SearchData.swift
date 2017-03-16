@@ -8,9 +8,7 @@
 
 import UIKit
 
-
 class SearchData {
-    
     func cancelSearching(_ searchBar: UISearchBar, searchBarActive: Bool) -> Bool {
         searchBar.resignFirstResponder()
         searchBar.text = ""
