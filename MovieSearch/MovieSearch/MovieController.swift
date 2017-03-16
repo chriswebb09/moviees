@@ -87,7 +87,27 @@ extension MovieViewController {
     }
 }
 
+
+// MARK: UICollectionViewDelegate
+
 extension MovieViewController {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: 100, height: 50)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+        if let cell = collectionView.cellForItem(at: indexPath) as? MovieCell {
+            cell.isSelected = cell.selectedStyle()
+        }
+        return true
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? MovieCell {
+            cell.isSelected = cell.selectedStyle()
+        }
+    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return datasource.sizeForItemAt
@@ -164,28 +184,6 @@ extension MovieViewController: UISearchResultsUpdating {
     
     public func updateSearchResults(for searchController: UISearchController) {
         print("update")
-    }
-}
-
-// MARK: UICollectionViewDelegate
-
-extension MovieViewController {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: 100, height: 50)
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        if let cell = collectionView.cellForItem(at: indexPath) as? MovieCell {
-            cell.isSelected = cell.selectedStyle()
-        }
-        return true
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) as? MovieCell {
-            cell.isSelected = cell.selectedStyle()
-        }
     }
 }
 
