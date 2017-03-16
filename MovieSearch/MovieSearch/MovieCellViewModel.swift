@@ -10,5 +10,7 @@ import UIKit
 
 struct MovieCellViewModel {
     var title: String
-    var poterImage: UIImage
+    var posterImage: UIImage
+    
+    
 }

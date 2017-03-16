@@ -44,11 +44,13 @@ extension SearchViewController {
             destinationVC.navigationController?.navigationBar.topItem?.title = viewModel.searchText
             destinationVC.title = "Search term: \(viewModel.searchText)"
             let testMovies = destinationVC.datasource.getAll()
-            api.sendAPICall(from: viewModel.encodeString(viewModel.searchText)!) { movie in
-                destinationVC.movies = movie.0
-                destinationVC.movies?.append(contentsOf: testMovies)
-                DispatchQueue.main.async {
-                    destinationVC.collectionView?.reloadData()
+            if let search = viewModel.encodeString(viewModel.searchText) {
+                api.sendAPICall(from: search) { movie in
+                    destinationVC.movies = movie.0
+                    destinationVC.movies?.append(contentsOf: testMovies)
+                    DispatchQueue.main.async {
+                        destinationVC.collectionView?.reloadData()
+                    }
                 }
             }
         }

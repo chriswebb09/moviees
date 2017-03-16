@@ -20,6 +20,7 @@ protocol UserProtocol {
 }
 
 class MovieUser: Object, UserProtocol {
+    
     dynamic var username = ""
     dynamic var uid = ""
     dynamic var firstName = ""
