@@ -15,12 +15,9 @@ typealias JSONData = [String : Any]
 
 final class APIClient {
     
-    fileprivate var queue = OperationQueue()
-    
-    var pageNumber = 1
-    
     let session = URLSession(configuration: URLSessionConfiguration.ephemeral)
-    //let realm = try! Realm()
+    fileprivate var queue = OperationQueue()
+    var pageNumber = 1
     var movies: Results<Movie>!
     
     deinit {
@@ -107,7 +104,7 @@ extension APIClient {
                     }
                     completion(allMovies, 1)
                 }
-            } 
+            }
         }
     }
 }

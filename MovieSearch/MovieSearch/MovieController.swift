@@ -43,6 +43,14 @@ class MovieViewController: UICollectionViewController {
     let searchController = UISearchController(searchResultsController: nil)
     let layout = UICollectionViewFlowLayout()
     
+    required init?(coder aDecoder: NSCoder? = nil) {
+        if let coder = aDecoder {
+            super.init(coder: coder)!
+        } else {
+            super.init()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()

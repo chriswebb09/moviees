@@ -19,6 +19,14 @@ class SearchViewController: UIViewController {
     
     @IBOutlet var searchView: SearchView!
     
+    required init?(coder aDecoder: NSCoder? = nil) {
+        if let coder = aDecoder {
+            super.init(coder: coder)!
+        } else {
+            super.init()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view = searchView
@@ -43,6 +51,7 @@ extension SearchViewController {
             let destinationVC = segue.destination as! MovieViewController
             destinationVC.navigationController?.navigationBar.topItem?.title = viewModel.searchText
             destinationVC.title = "Search term: \(viewModel.searchText)"
+            
             let testMovies = destinationVC.datasource.getAll()
             if let search = viewModel.encodeString(viewModel.searchText) {
                 api.sendAPICall(from: search) { movie in
