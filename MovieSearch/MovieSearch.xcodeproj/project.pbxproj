@@ -174,12 +174,12 @@
 				A75A672B1E6B56B700399BEC /* SearchViewModel.swift */,
 				A7154DC11E711F13000B274F /* UICollectionViewController+Extension.swift */,
 				A7154DBF1E70EF39000B274F /* UIViewController+Extension.swift */,
+				A7B4BDFE1E7EFBE5008A2C35 /* FlowController.swift */,
+				A7B4BE001E7EFC44008A2C35 /* MainFlowController.swift */,
 				A7B22E001E6620460087A028 /* Main.storyboard */,
 				A7B22E031E6620460087A028 /* Assets.xcassets */,
 				A7B22E051E6620460087A028 /* LaunchScreen.storyboard */,
 				A7481BCF1E6E6D2700312BDC /* Info.plist */,
-				A7B4BDFE1E7EFBE5008A2C35 /* FlowController.swift */,
-				A7B4BE001E7EFC44008A2C35 /* MainFlowController.swift */,
 			);
 			path = MovieSearch;
 			sourceTree = "<group>";

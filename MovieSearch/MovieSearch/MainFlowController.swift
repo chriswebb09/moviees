@@ -20,7 +20,6 @@ class MainFlowController : FlowController {
     }
     
     func start() {
-        
         let navigationController = UINavigationController()
         if let frame = configure.window?.bounds {
             navigationController.view.frame = frame
@@ -29,12 +28,9 @@ class MainFlowController : FlowController {
         configure.window?.rootViewController = navigationController
         configure.window?.makeKeyAndVisible()
         
-        let mainConfiguration = FlowConfigure(window: nil, navigationController: navigationController, parent: self)
+        let mainConfiguration = FlowConfigure(window: nil,
+                                              navigationController: navigationController,
+                                              parent: self)
         
-        
-        
-     //   let owlConf = FlowConfigure(window: nil, navigationController: navigationController, parent: self)
-       // childFlow = OwlsFlowController(configure: owlConf)
-       // childFlow?.start()
     }
 }

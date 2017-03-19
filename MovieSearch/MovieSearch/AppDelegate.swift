@@ -13,15 +13,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow? = {
         let window = UIWindow(frame: UIScreen.main.bounds)
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let initialViewController = storyboard.instantiateViewController(withIdentifier: "SearchViewController")
-        window.rootViewController = initialViewController
+        
+        //var main = MainFlowController(configure: FlowConfigure(window: window, navigationController: UINavigationController(), parent: nil))
+        //print(main.start())
+        
+        //print(main.configure.getFlowType())
+        // main.start()
+        // print(main.configure.getFlowType())
         return window
     }()
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        self.window?.makeKeyAndVisible()
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+        let configure = FlowConfigure(window: window, navigationController: UINavigationController(), parent: nil)
+        let mainFlow = MainFlowController(configure: configure)
+        mainFlow.start()
+        
         return true
     }
+    
+//     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+//        window = UIWindow(frame : UIScreen.main.bounds)
+//        let configure = FlowConfigure(window: window, navigationController: UINavigationController(), parent: nil)
+//        let mainFlow = MainFlowController(configure: configure)
+//        mainFlow.start()
+//        
+//        return true
+//    }
+//    
+    
+//    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let initialViewController = storyboard.instantiateViewController(withIdentifier: "SearchViewController")
+//        window?.rootViewController = initialViewController
+//        let configure = FlowConfigure(window: window, navigationController: nil, parent: nil)
+//        let mainFlow = MainFlowController(configure: configure)
+//        mainFlow.start()
+//        
+//       // self.window?.makeKeyAndVisible()
+//        return true
+//    }
 }
 
