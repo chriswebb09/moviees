@@ -70,7 +70,7 @@ class Movie: Object {
     }
     
     override static func primaryKey() -> String? {
-        return "title"
+        return "imdbID"
     }
 }
 

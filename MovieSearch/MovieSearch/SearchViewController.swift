@@ -11,7 +11,7 @@ import RealmSwift
 
 class SearchViewController: UIViewController {
     
-    let realm = try! Realm()
+    //let realm = try! Realm()
     var api = APIClient()
     var movies: [Movie] = [Movie]()
     var viewModel: SearchViewModel = SearchViewModel(searchText: "", url: URL(string: "noe"))

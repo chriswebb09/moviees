@@ -154,6 +154,8 @@ extension MovieViewController: UISearchControllerDelegate {
         }
     }
     
+    
+    
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         searchBarActive = SearchData().cancelSearching(searchBar, searchBarActive: searchBarActive)
         DispatchQueue.main.async {
@@ -210,3 +212,13 @@ extension MovieViewController: UISearchBarDelegate {
 }
 
 
+
+import UIKit
+
+class SearchData {
+    func cancelSearching(_ searchBar: UISearchBar, searchBarActive: Bool) -> Bool {
+        searchBar.resignFirstResponder()
+        searchBar.text = ""
+        return false
+    }
+}

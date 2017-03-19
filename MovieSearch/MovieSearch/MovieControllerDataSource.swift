@@ -12,7 +12,7 @@ import RealmSwift
 
 class MovieControllerDataSource {
     
-    private let realm = try! Realm()
+   private let realm = try! Realm()
     
     var movies = [Movie]()
     

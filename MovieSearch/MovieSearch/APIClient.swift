@@ -20,7 +20,7 @@ final class APIClient {
     var pageNumber = 1
     
     let session = URLSession(configuration: URLSessionConfiguration.ephemeral)
-    let realm = try! Realm()
+    //let realm = try! Realm()
     var movies: Results<Movie>!
     
     deinit {

@@ -17,3 +17,9 @@ struct SearchViewModel {
         return self.url
     }
 }
+
+extension String {
+    func urlEncodedString() -> String? {
+        return self.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+    }
+}

@@ -27,4 +27,14 @@ extension UICollectionViewController {
         reusableview.frame = CGRect(x:0 , y:0, width: self.view.frame.width, height:50)
         return reusableview
     }
+    
+    func hideKeyboardWhenTapped(tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard(end:)))) -> Bool {
+        view.addGestureRecognizer(tap)
+        return true
+    }
+    
+    func dismissKeyboard(end: Bool) -> Bool {
+        view.endEditing(end)
+        return end
+    }
 }
